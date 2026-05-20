@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -111,8 +112,8 @@ const articles: Record<string, {
   },
 };
 
-export default async function JournalArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default function JournalArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const article = articles[slug];
 
   if (!article) {
