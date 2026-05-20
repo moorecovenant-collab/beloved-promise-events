@@ -45,9 +45,12 @@ export default function ContactPage() {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log(data);
-    setSubmitted(true);
+    const res = await fetch("https://formspree.io/f/mzdwejlk", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) setSubmitted(true);
   };
 
   return (
