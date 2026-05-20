@@ -191,6 +191,13 @@ export default function ContactPage() {
 
             {/* Form */}
             <ScrollReveal delay={0.2} direction="right">
+              <div className="flex items-start gap-4 p-5 border border-gold/20 bg-gold/5 mb-8">
+                <span className="text-gold shrink-0 mt-0.5">—</span>
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  <span className="text-gold">A note before you reach out: </span>
+                  Moore Covenant Productions is built on faith — that&apos;s where our work ethic and commitment to you come from. It&apos;s not a requirement for working together. If you value integrity and work done right, you&apos;re in the right place.
+                </p>
+              </div>
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}

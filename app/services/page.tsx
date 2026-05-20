@@ -206,6 +206,21 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* ─── WHO WE WORK WITH ─── */}
+      <section className="px-6 md:px-10 lg:px-16 pb-10">
+        <div className="max-w-[1400px] mx-auto">
+          <ScrollReveal>
+            <div className="flex items-start gap-5 p-6 border border-gold/20 bg-gold/5">
+              <span className="text-gold shrink-0 mt-0.5 text-lg">—</span>
+              <p className="text-sm text-text-secondary leading-relaxed">
+                <span className="text-gold font-medium">Who we work with: </span>
+                Moore Covenant Productions is a faith-driven agency. That&apos;s where our standards and commitment come from — not a barrier to working with us. Clients who value integrity and work done right are always welcome here, regardless of where they stand on faith. We reserve the right to decline engagements that conflict with our core values.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ─── SERVICE CARDS ─── */}
       <section className="px-6 md:px-10 lg:px-16 pb-12 md:pb-16">
         <div className="max-w-[1400px] mx-auto">

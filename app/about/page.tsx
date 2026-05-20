@@ -113,6 +113,29 @@ export default function AboutPage() {
               </ScrollReveal>
 
               <ScrollReveal delay={0.12}>
+                <div className="my-8 p-7 border border-gold/20 bg-gold/5">
+                  <p className="text-[9px] tracking-[0.2em] uppercase text-gold mb-4">Who We Work With</p>
+                  <p
+                    className="font-display text-xl md:text-2xl font-light text-cream leading-snug mb-4"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                  >
+                    Faith-driven. Open to everyone built on purpose.
+                  </p>
+                  <div className="space-y-3 text-text-secondary text-sm leading-loose">
+                    <p>
+                      Moore Covenant Productions is a faith-driven creative agency. That&apos;s where our work ethic, our standards, and our commitment to you come from. It doesn&apos;t mean we&apos;ll preach at you or turn down your project because you don&apos;t share our beliefs.
+                    </p>
+                    <p>
+                      It means you&apos;re getting someone who takes their word seriously. The covenant isn&apos;t just a name — it&apos;s how we operate. Clients who value integrity, discipline, and work done right will always have a home here — regardless of where they stand on faith.
+                    </p>
+                    <p className="text-cream/80">
+                      We reserve the right to decline or exit engagements that conflict with our core values. That determination is made with honesty, respect, and written notice — never without conversation.
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={0.12}>
                 <div className="border-l-2 border-gold/40 pl-6 py-2 my-8">
                   <p className="text-[9px] tracking-[0.2em] uppercase text-gold mb-4">January 2nd, 2025</p>
                   <div className="space-y-4 text-text-secondary text-sm md:text-base leading-loose italic font-light" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
