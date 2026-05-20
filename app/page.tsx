@@ -235,22 +235,41 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── METRO PHOTO STRIP ─── */}
+      <section className="grid grid-cols-2 gap-px bg-border/40">
+        {["/metro-1.jpg", "/metro-2.jpg"].map((src, i) => (
+          <ScrollReveal key={src} delay={i * 0.15} direction="up">
+            <div className="relative overflow-hidden group" style={{ aspectRatio: "4/3" }}>
+              <Image
+                src={src}
+                alt="Moore Covenant Productions"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-500" />
+              <div className="absolute top-4 left-4 w-5 h-5 border-t border-l border-gold/30 group-hover:border-gold/60 transition-colors duration-500" />
+              <div className="absolute bottom-4 right-4 w-5 h-5 border-b border-r border-gold/30 group-hover:border-gold/60 transition-colors duration-500" />
+            </div>
+          </ScrollReveal>
+        ))}
+      </section>
+
       {/* ─── MANIFESTO / ABOUT TEASER ─── */}
       <section className="py-24 md:py-36 lg:py-44 px-6 md:px-10 lg:px-16 bg-black">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
             {/* Photo */}
             <ScrollReveal direction="left">
-              <div className="relative aspect-[2/3] max-w-lg overflow-hidden border border-gold/15 bg-dark flex items-center justify-center">
-                <div className="text-center px-8">
-                  <div className="w-10 h-px bg-gold/30 mx-auto mb-5" />
-                  <p className="font-display text-xl font-light italic text-gold/40" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                    Moore Covenant<br />Productions
-                  </p>
-                  <div className="w-10 h-px bg-gold/30 mx-auto mt-5" />
-                </div>
-                <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-gold/20" />
-                <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/20" />
+              <div className="relative aspect-[2/3] max-w-lg overflow-hidden border border-gold/15">
+                <Image
+                  src="/hero-lifestyle.jpg"
+                  alt="Elijah Moore — Moore Covenant Productions"
+                  fill
+                  className="object-cover object-top"
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 55%, rgba(8,8,8,0.65) 100%)" }} />
+                <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-gold/30" />
+                <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/30" />
               </div>
             </ScrollReveal>
 
