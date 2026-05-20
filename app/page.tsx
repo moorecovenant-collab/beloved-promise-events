@@ -182,10 +182,10 @@ export default function HomePage() {
           >
             <div className="w-full h-full border border-gold/15 relative overflow-hidden">
               <Image
-                src="/IMG_2407.jpg"
-                alt="Elijah Moore — Founder, Moore Covenant Productions"
+                src="/metro-2.jpg"
+                alt="Moore Covenant Productions"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-center"
                 priority
               />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.7) 100%)" }} />
@@ -243,8 +243,8 @@ export default function HomePage() {
             <ScrollReveal direction="left">
               <div className="relative aspect-[2/3] max-w-lg overflow-hidden border border-gold/15">
                 <Image
-                  src="/IMG_2406.jpg"
-                  alt="Elijah Moore"
+                  src="/metro-1.jpg"
+                  alt="Moore Covenant Productions"
                   fill
                   className="object-cover object-center"
                 />
