@@ -1,108 +1,154 @@
 "use client";
 
+import { useId } from "react";
 import { motion } from "framer-motion";
 
-interface BalloonProps {
-  cx: number;
-  cy: number;
-  r: number;
-  color: string;
-  opacity?: number;
-  delay?: number;
-  duration?: number;
+// ── Metallic gold palette — 4 subtle variants for visual depth ────────────────
+const GRAD = [
+  { h: "#FFFDE0", l: "#F5D560", m: "#D4A030", d: "#7A5010" }, // classic gold
+  { h: "#FFF8E8", l: "#F0C850", m: "#C89020", d: "#6E4808" }, // warm gold
+  { h: "#FFFCE8", l: "#F8E080", m: "#DDB040", d: "#8A6218" }, // champagne
+  { h: "#FFF5D8", l: "#ECC040", m: "#BE8818", d: "#624008" }, // deep gold
+];
+
+type BD = {
+  id: string;
+  cx: number; cy: number; r: number;
+  gi?: number; op?: number; dl?: number; dur?: number;
+};
+
+// ── Gradient <defs> block ─────────────────────────────────────────────────────
+// Each balloon gets two gradients:
+//   m{id} — metallic body: focal point top-left → bright gold → deep shadow
+//   s{id} — specular shine: soft white bloom at top-left
+function Defs({ items }: { items: BD[] }) {
+  return (
+    <defs>
+      {items.flatMap(({ id, gi = 0 }) => {
+        const g = GRAD[gi % 4];
+        return [
+          <radialGradient
+            key={`m${id}`} id={`m${id}`}
+            gradientUnits="objectBoundingBox"
+            cx="0.30" cy="0.25" r="0.76" fx="0.25" fy="0.20"
+          >
+            <stop offset="0%"   stopColor={g.h} />
+            <stop offset="16%"  stopColor={g.l} />
+            <stop offset="56%"  stopColor={g.m} />
+            <stop offset="100%" stopColor={g.d} />
+          </radialGradient>,
+          <radialGradient
+            key={`s${id}`} id={`s${id}`}
+            gradientUnits="objectBoundingBox"
+            cx="0.35" cy="0.28" r="0.34"
+          >
+            <stop offset="0%"   stopColor="white" stopOpacity="0.68" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </radialGradient>,
+        ];
+      })}
+    </defs>
+  );
 }
 
-function Balloon({ cx, cy, r, color, opacity = 0.75, delay = 0, duration = 5 }: BalloonProps) {
-  const rx = r * 0.85;
-  const ry = r;
+// ── Single 3D metallic balloon ────────────────────────────────────────────────
+function Bal({
+  id, cx, cy, r,
+  op = 0.90, dl = 0, dur = 5,
+}: { id: string; cx: number; cy: number; r: number; op?: number; dl?: number; dur?: number }) {
   return (
     <motion.g
-      animate={{ y: [0, -6, 0], rotate: [-1, 1, -1] }}
-      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
+      animate={{ y: [0, -5, 0], rotate: [-0.5, 0.5, -0.5] }}
+      transition={{ duration: dur, delay: dl, repeat: Infinity, ease: "easeInOut" }}
       style={{ originX: cx, originY: cy }}
     >
-      {/* Balloon body */}
-      <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={color} opacity={opacity} />
-      {/* Highlight */}
-      <ellipse
-        cx={cx - rx * 0.3}
-        cy={cy - ry * 0.3}
-        rx={rx * 0.28}
-        ry={ry * 0.22}
-        fill="white"
-        opacity={opacity * 0.35}
-      />
+      {/* Metallic body */}
+      <circle cx={cx} cy={cy} r={r} fill={`url(#m${id})`} opacity={op} />
+      {/* Specular highlight overlay */}
+      <circle cx={cx} cy={cy} r={r} fill={`url(#s${id})`} opacity={op} />
       {/* Knot */}
       <path
-        d={`M${cx - 3} ${cy + ry} Q${cx} ${cy + ry + 5} ${cx + 3} ${cy + ry}`}
-        fill={color}
-        opacity={opacity * 0.9}
-        strokeWidth="0"
+        d={`M${cx - 2.5} ${cy + r} Q${cx} ${cy + r + 5} ${cx + 2.5} ${cy + r}`}
+        fill="#7A5010" opacity={op * 0.85}
       />
       {/* String */}
       <path
-        d={`M${cx} ${cy + ry + 5} Q${cx + 4} ${cy + ry + 14} ${cx - 2} ${cy + ry + 22}`}
-        stroke={color}
-        strokeWidth="1"
-        fill="none"
-        opacity={opacity * 0.4}
+        d={`M${cx} ${cy + r + 5} C${cx + 5} ${cy + r + 14},${cx - 3} ${cy + r + 22},${cx + 1} ${cy + r + 28}`}
+        stroke="#9A6818" strokeWidth="0.85" fill="none" opacity={op * 0.22}
       />
     </motion.g>
   );
 }
 
-// ── ARCH: swoops across top of a section ──────────────────────────────────────
+// ── ARCH ──────────────────────────────────────────────────────────────────────
 export function BalloonArch({ className = "" }: { className?: string }) {
-  const gold = "#C9A878";
-  const champagne = "#E8D5B0";
-  const deepGold = "#B8924A";
-  const roseGold = "#D4A882";
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
 
-  // Organic cluster arch - balloons along a curve from left to right
-  const balloons = [
-    // Left cluster (bottom of arch)
-    { cx: 30,  cy: 210, r: 28, color: deepGold,  opacity: 0.55, delay: 0 },
-    { cx: 72,  cy: 185, r: 36, color: gold,       opacity: 0.65, delay: 0.4 },
-    { cx: 55,  cy: 155, r: 22, color: champagne,  opacity: 0.50, delay: 0.8 },
-    { cx: 105, cy: 160, r: 30, color: roseGold,   opacity: 0.60, delay: 0.2 },
-    { cx: 88,  cy: 130, r: 18, color: gold,       opacity: 0.45, delay: 1.0 },
-    { cx: 130, cy: 140, r: 26, color: deepGold,   opacity: 0.55, delay: 0.6 },
-    { cx: 115, cy: 110, r: 14, color: champagne,  opacity: 0.40, delay: 1.4 },
-
-    // Mid arch (top of curve)
-    { cx: 170, cy: 115, r: 32, color: gold,       opacity: 0.62, delay: 0.3 },
-    { cx: 200, cy: 90,  r: 20, color: roseGold,   opacity: 0.50, delay: 0.7 },
-    { cx: 230, cy: 100, r: 28, color: champagne,  opacity: 0.55, delay: 1.1 },
-    { cx: 215, cy: 70,  r: 16, color: deepGold,   opacity: 0.42, delay: 0.9 },
-    { cx: 255, cy: 80,  r: 22, color: gold,       opacity: 0.58, delay: 0.5 },
-
-    // Right cluster (bottom of arch)
-    { cx: 290, cy: 100, r: 34, color: roseGold,   opacity: 0.60, delay: 0.2 },
-    { cx: 330, cy: 120, r: 26, color: gold,       opacity: 0.55, delay: 0.8 },
-    { cx: 315, cy: 148, r: 18, color: champagne,  opacity: 0.45, delay: 1.2 },
-    { cx: 360, cy: 140, r: 30, color: deepGold,   opacity: 0.58, delay: 0.4 },
-    { cx: 345, cy: 170, r: 22, color: gold,       opacity: 0.50, delay: 1.0 },
-    { cx: 390, cy: 165, r: 36, color: roseGold,   opacity: 0.62, delay: 0.6 },
-    { cx: 378, cy: 195, r: 16, color: champagne,  opacity: 0.40, delay: 1.6 },
+  const raw = [
+    // Outer ring — main arch curve
+    { cx: 22,  cy: 268, r: 28, gi: 0, op: 0.90, dl: 0.0,  dur: 5.0 },
+    { cx: 62,  cy: 248, r: 26, gi: 1, op: 0.88, dl: 0.3,  dur: 4.8 },
+    { cx: 56,  cy: 212, r: 24, gi: 2, op: 0.86, dl: 0.6,  dur: 5.2 },
+    { cx: 90,  cy: 180, r: 26, gi: 3, op: 0.88, dl: 0.4,  dur: 4.6 },
+    { cx: 86,  cy: 144, r: 24, gi: 0, op: 0.86, dl: 0.8,  dur: 5.4 },
+    { cx: 120, cy: 112, r: 24, gi: 1, op: 0.86, dl: 0.2,  dur: 4.8 },
+    { cx: 115, cy: 78,  r: 22, gi: 2, op: 0.84, dl: 1.0,  dur: 5.0 },
+    { cx: 148, cy: 54,  r: 22, gi: 3, op: 0.84, dl: 0.5,  dur: 4.6 },
+    { cx: 182, cy: 38,  r: 24, gi: 0, op: 0.86, dl: 0.9,  dur: 5.2 },
+    { cx: 218, cy: 26,  r: 22, gi: 1, op: 0.84, dl: 0.1,  dur: 4.8 },
+    { cx: 258, cy: 20,  r: 26, gi: 2, op: 0.88, dl: 0.6,  dur: 5.0 },
+    { cx: 298, cy: 26,  r: 22, gi: 3, op: 0.84, dl: 0.3,  dur: 4.8 },
+    { cx: 334, cy: 38,  r: 24, gi: 0, op: 0.86, dl: 0.7,  dur: 5.4 },
+    { cx: 368, cy: 54,  r: 22, gi: 1, op: 0.84, dl: 1.1,  dur: 4.6 },
+    { cx: 402, cy: 78,  r: 22, gi: 2, op: 0.84, dl: 0.4,  dur: 5.0 },
+    { cx: 396, cy: 112, r: 24, gi: 3, op: 0.86, dl: 0.8,  dur: 4.8 },
+    { cx: 430, cy: 144, r: 24, gi: 0, op: 0.86, dl: 0.2,  dur: 5.2 },
+    { cx: 426, cy: 180, r: 26, gi: 1, op: 0.88, dl: 0.6,  dur: 4.6 },
+    { cx: 460, cy: 212, r: 24, gi: 2, op: 0.86, dl: 1.0,  dur: 5.0 },
+    { cx: 454, cy: 248, r: 26, gi: 3, op: 0.88, dl: 0.5,  dur: 4.8 },
+    { cx: 494, cy: 268, r: 28, gi: 0, op: 0.90, dl: 0.0,  dur: 5.2 },
+    // Inner ring — fills gaps on the inside of the arch
+    { cx: 40,  cy: 242, r: 20, gi: 1, op: 0.82, dl: 0.4,  dur: 4.8 },
+    { cx: 72,  cy: 195, r: 20, gi: 2, op: 0.82, dl: 0.7,  dur: 5.0 },
+    { cx: 104, cy: 148, r: 20, gi: 3, op: 0.82, dl: 0.2,  dur: 4.6 },
+    { cx: 133, cy: 96,  r: 18, gi: 0, op: 0.80, dl: 0.9,  dur: 5.2 },
+    { cx: 165, cy: 62,  r: 18, gi: 1, op: 0.80, dl: 0.5,  dur: 4.8 },
+    { cx: 200, cy: 42,  r: 20, gi: 2, op: 0.82, dl: 0.1,  dur: 5.0 },
+    { cx: 236, cy: 32,  r: 18, gi: 3, op: 0.80, dl: 0.8,  dur: 4.6 },
+    { cx: 278, cy: 30,  r: 20, gi: 0, op: 0.82, dl: 0.3,  dur: 5.2 },
+    { cx: 318, cy: 32,  r: 18, gi: 1, op: 0.80, dl: 0.6,  dur: 4.8 },
+    { cx: 354, cy: 42,  r: 20, gi: 2, op: 0.82, dl: 0.0,  dur: 5.0 },
+    { cx: 390, cy: 62,  r: 18, gi: 3, op: 0.80, dl: 0.7,  dur: 4.6 },
+    { cx: 422, cy: 96,  r: 18, gi: 0, op: 0.80, dl: 1.2,  dur: 5.2 },
+    { cx: 442, cy: 148, r: 20, gi: 1, op: 0.82, dl: 0.4,  dur: 4.8 },
+    { cx: 444, cy: 195, r: 20, gi: 2, op: 0.82, dl: 0.9,  dur: 5.0 },
+    { cx: 476, cy: 242, r: 20, gi: 3, op: 0.82, dl: 0.2,  dur: 4.6 },
+    // Base fill extras
+    { cx: 30,  cy: 276, r: 20, gi: 2, op: 0.84, dl: 0.8,  dur: 5.0 },
+    { cx: 486, cy: 276, r: 20, gi: 1, op: 0.84, dl: 0.5,  dur: 4.8 },
   ];
+
+  const bs: BD[] = raw.map((d, i) => ({ ...d, id: `${uid}${i}` }));
 
   return (
     <div className={`pointer-events-none select-none ${className}`}>
       <svg
-        viewBox="0 0 420 240"
+        viewBox="0 0 516 292"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
         preserveAspectRatio="xMidYMid meet"
       >
-        {balloons.map((b, i) => (
-          <Balloon key={i} {...b} duration={4.5 + (i % 4) * 0.5} />
+        <Defs items={bs} />
+        {bs.map(b => (
+          <Bal key={b.id} id={b.id} cx={b.cx} cy={b.cy} r={b.r}
+            op={b.op} dl={b.dl} dur={b.dur} />
         ))}
       </svg>
     </div>
   );
 }
 
-// ── CLUSTER: corner or floating cluster of balloons ───────────────────────────
+// ── CLUSTER ───────────────────────────────────────────────────────────────────
 export function BalloonCluster({
   className = "",
   variant = "right",
@@ -110,39 +156,37 @@ export function BalloonCluster({
   className?: string;
   variant?: "left" | "right" | "center";
 }) {
-  const gold = "#C9A878";
-  const champagne = "#E8D5B0";
-  const deepGold = "#B8924A";
-  const roseGold = "#D4A882";
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
 
-  const leftBalloons = [
-    { cx: 40,  cy: 110, r: 32, color: gold,      opacity: 0.55, delay: 0 },
-    { cx: 75,  cy: 85,  r: 24, color: champagne, opacity: 0.48, delay: 0.5 },
-    { cx: 20,  cy: 78,  r: 20, color: deepGold,  opacity: 0.45, delay: 0.9 },
-    { cx: 60,  cy: 56,  r: 16, color: roseGold,  opacity: 0.40, delay: 1.3 },
-    { cx: 95,  cy: 115, r: 20, color: gold,      opacity: 0.42, delay: 0.7 },
-    { cx: 45,  cy: 45,  r: 12, color: champagne, opacity: 0.35, delay: 1.7 },
-  ];
+  const variants: Record<string, Array<Omit<BD, "id">>> = {
+    right: [
+      { cx: 78,  cy: 108, r: 32, gi: 0, op: 0.88, dl: 0.0, dur: 5.0 },
+      { cx: 44,  cy: 82,  r: 24, gi: 1, op: 0.84, dl: 0.5, dur: 4.8 },
+      { cx: 108, cy: 78,  r: 22, gi: 2, op: 0.82, dl: 1.0, dur: 5.2 },
+      { cx: 66,  cy: 52,  r: 18, gi: 3, op: 0.80, dl: 0.3, dur: 4.6 },
+      { cx: 28,  cy: 112, r: 18, gi: 0, op: 0.78, dl: 0.8, dur: 5.0 },
+      { cx: 96,  cy: 50,  r: 14, gi: 1, op: 0.76, dl: 1.3, dur: 4.8 },
+    ],
+    left: [
+      { cx: 42,  cy: 108, r: 32, gi: 2, op: 0.88, dl: 0.2, dur: 5.2 },
+      { cx: 76,  cy: 82,  r: 24, gi: 3, op: 0.84, dl: 0.6, dur: 4.8 },
+      { cx: 16,  cy: 80,  r: 22, gi: 0, op: 0.82, dl: 0.0, dur: 5.0 },
+      { cx: 56,  cy: 52,  r: 18, gi: 1, op: 0.80, dl: 1.0, dur: 4.6 },
+      { cx: 92,  cy: 112, r: 18, gi: 2, op: 0.78, dl: 0.5, dur: 5.2 },
+      { cx: 26,  cy: 48,  r: 14, gi: 3, op: 0.76, dl: 1.4, dur: 4.8 },
+    ],
+    center: [
+      { cx: 60,  cy: 100, r: 30, gi: 1, op: 0.88, dl: 0.1, dur: 5.0 },
+      { cx: 30,  cy: 76,  r: 22, gi: 2, op: 0.84, dl: 0.5, dur: 4.8 },
+      { cx: 90,  cy: 74,  r: 20, gi: 3, op: 0.82, dl: 0.9, dur: 5.2 },
+      { cx: 58,  cy: 48,  r: 18, gi: 0, op: 0.80, dl: 0.3, dur: 4.6 },
+      { cx: 18,  cy: 106, r: 16, gi: 1, op: 0.78, dl: 0.7, dur: 5.0 },
+      { cx: 102, cy: 104, r: 14, gi: 2, op: 0.76, dl: 1.2, dur: 4.8 },
+    ],
+  };
 
-  const rightBalloons = [
-    { cx: 80,  cy: 110, r: 34, color: gold,      opacity: 0.58, delay: 0.2 },
-    { cx: 45,  cy: 82,  r: 24, color: roseGold,  opacity: 0.50, delay: 0.6 },
-    { cx: 108, cy: 80,  r: 22, color: champagne, opacity: 0.46, delay: 1.0 },
-    { cx: 68,  cy: 52,  r: 18, color: deepGold,  opacity: 0.42, delay: 0.4 },
-    { cx: 28,  cy: 115, r: 18, color: gold,      opacity: 0.38, delay: 1.4 },
-    { cx: 98,  cy: 50,  r: 12, color: roseGold,  opacity: 0.32, delay: 1.8 },
-  ];
-
-  const centerBalloons = [
-    { cx: 60,  cy: 100, r: 30, color: gold,      opacity: 0.55, delay: 0 },
-    { cx: 30,  cy: 78,  r: 22, color: champagne, opacity: 0.48, delay: 0.4 },
-    { cx: 90,  cy: 75,  r: 20, color: roseGold,  opacity: 0.45, delay: 0.8 },
-    { cx: 60,  cy: 50,  r: 16, color: deepGold,  opacity: 0.40, delay: 1.2 },
-    { cx: 18,  cy: 108, r: 16, color: gold,      opacity: 0.38, delay: 0.6 },
-    { cx: 102, cy: 105, r: 14, color: champagne, opacity: 0.34, delay: 1.6 },
-  ];
-
-  const balloons = variant === "left" ? leftBalloons : variant === "center" ? centerBalloons : rightBalloons;
+  const raw = variants[variant];
+  const bs: BD[] = raw.map((d, i) => ({ ...d, id: `${uid}${i}` }));
 
   return (
     <div className={`pointer-events-none select-none ${className}`}>
@@ -152,55 +196,55 @@ export function BalloonCluster({
         className="w-full h-full"
         preserveAspectRatio="xMidYMid meet"
       >
-        {balloons.map((b, i) => (
-          <Balloon key={i} {...b} duration={4 + (i % 3) * 0.6} />
+        <Defs items={bs} />
+        {bs.map(b => (
+          <Bal key={b.id} id={b.id} cx={b.cx} cy={b.cy} r={b.r}
+            op={b.op} dl={b.dl} dur={b.dur} />
         ))}
       </svg>
     </div>
   );
 }
 
-// ── GARLAND: horizontal string of balloons for banners ────────────────────────
+// ── GARLAND ───────────────────────────────────────────────────────────────────
 export function BalloonGarland({ className = "" }: { className?: string }) {
-  const gold = "#C9A878";
-  const champagne = "#E8D5B0";
-  const deepGold = "#B8924A";
-  const roseGold = "#D4A882";
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
 
-  const balloons = [
-    { cx: 30,  cy: 55, r: 24, color: gold,      opacity: 0.50, delay: 0 },
-    { cx: 68,  cy: 38, r: 18, color: champagne, opacity: 0.44, delay: 0.3 },
-    { cx: 100, cy: 50, r: 28, color: roseGold,  opacity: 0.52, delay: 0.6 },
-    { cx: 138, cy: 34, r: 20, color: deepGold,  opacity: 0.46, delay: 0.9 },
-    { cx: 170, cy: 50, r: 26, color: gold,      opacity: 0.50, delay: 0.2 },
-    { cx: 205, cy: 36, r: 16, color: champagne, opacity: 0.42, delay: 1.2 },
-    { cx: 234, cy: 52, r: 24, color: roseGold,  opacity: 0.48, delay: 0.5 },
-    { cx: 268, cy: 38, r: 20, color: deepGold,  opacity: 0.44, delay: 0.8 },
-    { cx: 298, cy: 54, r: 28, color: gold,      opacity: 0.52, delay: 0.1 },
-    { cx: 335, cy: 36, r: 18, color: champagne, opacity: 0.42, delay: 1.1 },
-    { cx: 362, cy: 52, r: 24, color: roseGold,  opacity: 0.48, delay: 0.4 },
-    { cx: 396, cy: 38, r: 20, color: deepGold,  opacity: 0.44, delay: 0.7 },
-    { cx: 425, cy: 56, r: 26, color: gold,      opacity: 0.50, delay: 1.0 },
+  const raw = [
+    { cx: 28,  cy: 54, r: 22, gi: 0, op: 0.85, dl: 0.0, dur: 5.0 },
+    { cx: 66,  cy: 38, r: 18, gi: 1, op: 0.80, dl: 0.3, dur: 4.8 },
+    { cx: 98,  cy: 52, r: 26, gi: 2, op: 0.88, dl: 0.6, dur: 5.2 },
+    { cx: 136, cy: 34, r: 20, gi: 3, op: 0.82, dl: 0.9, dur: 4.6 },
+    { cx: 168, cy: 50, r: 24, gi: 0, op: 0.86, dl: 0.2, dur: 5.0 },
+    { cx: 204, cy: 36, r: 16, gi: 1, op: 0.78, dl: 1.2, dur: 4.8 },
+    { cx: 232, cy: 52, r: 24, gi: 2, op: 0.86, dl: 0.5, dur: 5.2 },
+    { cx: 266, cy: 36, r: 20, gi: 3, op: 0.82, dl: 0.8, dur: 4.6 },
+    { cx: 296, cy: 54, r: 26, gi: 0, op: 0.88, dl: 0.1, dur: 5.0 },
+    { cx: 332, cy: 36, r: 18, gi: 1, op: 0.80, dl: 1.1, dur: 4.8 },
+    { cx: 360, cy: 52, r: 22, gi: 2, op: 0.84, dl: 0.4, dur: 5.2 },
+    { cx: 394, cy: 36, r: 20, gi: 3, op: 0.82, dl: 0.7, dur: 4.6 },
+    { cx: 422, cy: 54, r: 24, gi: 0, op: 0.86, dl: 1.0, dur: 5.0 },
   ];
+
+  const bs: BD[] = raw.map((d, i) => ({ ...d, id: `${uid}${i}` }));
 
   return (
     <div className={`pointer-events-none select-none ${className}`}>
       <svg
-        viewBox="0 0 460 90"
+        viewBox="0 0 458 88"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
         preserveAspectRatio="none"
       >
+        <Defs items={bs} />
         {/* Garland string */}
         <path
-          d="M30 55 Q49 65 68 55 Q84 45 100 55 Q119 65 138 55 Q154 45 170 55 Q187 65 205 55 Q219 45 234 55 Q251 65 268 55 Q283 45 298 55 Q316 65 335 55 Q348 45 362 55 Q379 65 396 55 Q410 45 425 55"
-          stroke={champagne}
-          strokeWidth="1"
-          fill="none"
-          opacity="0.25"
+          d="M28 54 Q47 64 66 54 Q82 44 98 54 Q117 64 136 54 Q152 44 168 54 Q186 64 204 54 Q218 44 232 54 Q249 64 266 54 Q281 44 296 54 Q314 64 332 54 Q346 44 360 54 Q377 64 394 54 Q408 44 422 54"
+          stroke="#D4A030" strokeWidth="1" fill="none" opacity="0.30"
         />
-        {balloons.map((b, i) => (
-          <Balloon key={i} {...b} duration={4.2 + (i % 4) * 0.4} />
+        {bs.map(b => (
+          <Bal key={b.id} id={b.id} cx={b.cx} cy={b.cy} r={b.r}
+            op={b.op} dl={b.dl} dur={b.dur} />
         ))}
       </svg>
     </div>
