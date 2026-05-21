@@ -47,7 +47,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #BE7B8E;
+  background: #C9A878;
 }
 
 /* Subtle texture overlay */
@@ -103,6 +103,21 @@ body {
   background: linear-gradient(90deg, transparent, #BE7B8E, transparent);
 }
 
+.divider-gold {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #C9A878;
+}
+
+.divider-gold::before,
+.divider-gold::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A878, transparent);
+}
+
 /* Photo placeholder */
 .photo-placeholder {
   background: linear-gradient(135deg, #F0DCE0 0%, #E8C4C8 50%, #F0DCE0 100%);
@@ -147,7 +162,7 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: #BE7B8E;
+  background: #C9A878;
   transition: width 0.35s ease;
 }
 
@@ -160,7 +175,7 @@ body {
 }
 
 .nav-link.active {
-  color: #BE7B8E;
+  color: #C9A878;
 }
 
 .nav-link.active::after {
@@ -212,8 +227,8 @@ body {
   gap: 0.75rem;
   padding: 1rem 2.5rem;
   background: transparent;
-  border: 1px solid #BE7B8E;
-  color: #BE7B8E;
+  border: 1px solid #C9A878;
+  color: #C9A878;
   font-family: var(--font-inter);
   font-size: 0.7rem;
   font-weight: 500;
@@ -229,14 +244,14 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: #BE7B8E;
+  background: #C9A878;
   transform: translateX(-101%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 0;
 }
 
 .btn-outline:hover {
-  color: #FAF5EE;
+  color: #2A0A1F;
 }
 
 .btn-outline:hover::before {
@@ -266,8 +281,9 @@ body {
 }
 
 .btn-ghost-light:hover {
-  border-color: rgba(250, 245, 238, 0.7);
-  background: rgba(250, 245, 238, 0.08);
+  border-color: #C9A878;
+  color: #C9A878;
+  background: rgba(201, 168, 120, 0.08);
 }
 
 /* Service / pricing cards */
@@ -278,8 +294,8 @@ body {
 }
 
 .service-card:hover {
-  border-color: #BE7B8E;
-  box-shadow: 0 8px 40px rgba(190, 123, 142, 0.12);
+  border-color: #C9A878;
+  box-shadow: 0 8px 40px rgba(201, 168, 120, 0.15);
   transform: translateY(-2px);
 }
 
@@ -292,8 +308,8 @@ body {
 }
 
 .pricing-card:hover {
-  border-color: #BE7B8E;
-  box-shadow: 0 12px 50px rgba(190, 123, 142, 0.15);
+  border-color: #C9A878;
+  box-shadow: 0 12px 50px rgba(201, 168, 120, 0.18);
   transform: translateY(-4px);
 }
 
@@ -340,7 +356,7 @@ body {
 .cursor-ring {
   width: 34px;
   height: 34px;
-  border: 1px solid rgba(190, 123, 142, 0.5);
+  border: 1px solid rgba(201, 168, 120, 0.5);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -355,6 +371,22 @@ body {
   justify-content: center;
   color: #C9A878;
   font-size: 1rem;
+}
+
+/* Gold text shimmer — for scripture/pull quotes */
+.gold-shimmer {
+  background: linear-gradient(135deg, #C9A878 0%, #E8D5B0 45%, #B8924A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Thin gold rule used as section separator */
+.gold-rule {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A878, transparent);
+  margin: 0 auto;
 }
 
 /* Input fields */
@@ -379,8 +411,8 @@ input, textarea, select {
 }
 
 .form-input:focus {
-  border-color: #BE7B8E;
-  box-shadow: 0 0 0 3px rgba(190, 123, 142, 0.1);
+  border-color: #C9A878;
+  box-shadow: 0 0 0 3px rgba(201, 168, 120, 0.12);
 }
 
 .form-label {

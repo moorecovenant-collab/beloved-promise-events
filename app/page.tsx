@@ -64,8 +64,8 @@ export default function HomePage() {
           <BalloonArch className="absolute top-0 right-0 w-[580px] md:w-[700px] opacity-70" />
           <div className="absolute top-1/4 right-8 md:right-16 lg:right-24 w-[320px] md:w-[400px] lg:w-[480px] aspect-[3/4]">
             <div className="photo-placeholder w-full h-full relative">
-              <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-rose/40" />
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-rose/40" />
+              <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-gold/50" />
+              <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-gold/50" />
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 z-10">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" opacity="0.45">
                   <circle cx="14" cy="10" r="5" stroke="#BE7B8E" strokeWidth="1.5"/>
@@ -87,8 +87,8 @@ export default function HomePage() {
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="flex items-center gap-3 mb-8">
-              <span className="block w-8 h-px bg-rose/60" />
-              <span className="section-label">Faith-Based Event Decorating · DMV</span>
+              <span className="block w-8 h-px bg-gold/60" />
+              <span className="section-label" style={{ color: "#C9A878" }}>Faith-Based Event Decorating · DMV</span>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ export default function HomePage() {
 
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="font-display text-base italic text-rose/70 pl-4 border-l-2 border-rose/30 mb-8 md:mb-10 leading-relaxed max-w-sm"
+              className="font-display text-base italic text-plum/70 pl-4 border-l-2 border-gold/50 mb-8 md:mb-10 leading-relaxed max-w-sm"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}>
               &ldquo;Let us hold tightly without wavering to the hope we affirm, for God can be trusted to keep his promise.&rdquo;
               <br />
@@ -143,7 +143,7 @@ export default function HomePage() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
           <motion.div animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-10 bg-gradient-to-b from-rose/50 to-transparent" />
+            className="w-px h-10 bg-gradient-to-b from-gold/60 to-transparent" />
           <p className="text-[9px] tracking-[0.3em] uppercase text-text-muted">Scroll</p>
         </motion.div>
       </section>
@@ -172,17 +172,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* GOLD RULE */}
+      <div className="bg-ivory py-6 flex justify-center">
+        <div className="flex items-center gap-3 w-48">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-gold/40" />
+          <span style={{ color: "#C9A878", fontSize: "0.65rem" }}>✦</span>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-gold/40" />
+        </div>
+      </div>
+
       {/* THREE PILLARS */}
       <section className="py-20 md:py-32 px-6 md:px-10 lg:px-16 bg-ivory">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-lg mx-auto mb-16">
             <ScrollReveal>
-              <p className="section-label justify-center mb-4 flex items-center gap-3">
-                <span className="block w-6 h-px bg-rose/60" />What Sets Us Apart<span className="block w-6 h-px bg-rose/60" />
+              <p className="section-label justify-center mb-4 flex items-center gap-3" style={{ color: "#C9A878" }}>
+                <span className="block w-6 h-px bg-gold/50" />What Sets Us Apart<span className="block w-6 h-px bg-gold/50" />
               </p>
               <h2 className="font-display text-display-lg font-light text-plum leading-tight"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                Decorated by Faith,<br /><em className="italic text-rose">Designed for You</em>
+                Decorated by Faith,<br /><em className="italic" style={{ color: "#C9A878" }}>Designed for You</em>
               </h2>
             </ScrollReveal>
           </div>
@@ -209,8 +218,8 @@ export default function HomePage() {
           <ScrollReveal direction="left">
             <div className="relative aspect-[3/4] max-w-md overflow-visible">
               <div className="photo-placeholder w-full h-full">
-                <div className="absolute top-5 left-5 w-8 h-8 border-t-2 border-l-2 border-rose/30" />
-                <div className="absolute bottom-5 right-5 w-8 h-8 border-b-2 border-r-2 border-rose/30" />
+                <div className="absolute top-5 left-5 w-8 h-8 border-t-2 border-l-2 border-gold/40" />
+                <div className="absolute bottom-5 right-5 w-8 h-8 border-b-2 border-r-2 border-gold/40" />
                 <div className="z-10 flex flex-col items-center gap-2">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" opacity="0.5">
                     <circle cx="12" cy="8" r="4" stroke="#BE7B8E" strokeWidth="1.5"/>
@@ -227,12 +236,12 @@ export default function HomePage() {
 
           <div>
             <ScrollReveal>
-              <p className="section-label mb-6 flex items-center gap-3">
-                <span className="block w-6 h-px bg-rose/60" />Meet Amyah
+              <p className="section-label mb-6 flex items-center gap-3" style={{ color: "#C9A878" }}>
+                <span className="block w-6 h-px bg-gold/50" />Meet Amyah
               </p>
               <h2 className="font-display text-display-lg font-light text-plum leading-tight mb-6"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                The Name Means<br /><em className="italic text-rose">Beloved</em>
+                The Name Means<br /><em className="italic" style={{ color: "#C9A878" }}>Beloved</em>
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
@@ -243,7 +252,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-wrap gap-2 mb-8">
                 {["Faith-Based", "DMV Area", "Luxury Decor", "Balloon Artistry", "Floral Design", "Theme Styling"].map((tag) => (
-                  <span key={tag} className="px-3 py-1.5 border border-rose/20 text-[9px] tracking-[0.14em] uppercase text-rose bg-blush">{tag}</span>
+                  <span key={tag} className="px-3 py-1.5 border text-[9px] tracking-[0.14em] uppercase" style={{ borderColor: "rgba(201,168,120,0.35)", color: "#C9A878", background: "rgba(201,168,120,0.06)" }}>{tag}</span>
                 ))}
               </div>
               <Link href="/about" className="btn-primary"><span>Amyah&apos;s Story</span></Link>
@@ -257,12 +266,12 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-xl mx-auto mb-16">
             <ScrollReveal>
-              <p className="section-label justify-center mb-4 flex items-center gap-3">
-                <span className="block w-6 h-px bg-rose/60" />What We Offer
+              <p className="section-label justify-center mb-4 flex items-center gap-3" style={{ color: "#C9A878" }}>
+                <span className="block w-6 h-px bg-gold/50" />What We Offer<span className="block w-6 h-px bg-gold/50" />
               </p>
               <h2 className="font-display text-display-lg font-light text-plum"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                Every Detail,<br /><em className="italic text-rose">Intentionally Placed</em>
+                Every Detail,<br /><em className="italic" style={{ color: "#C9A878" }}>Intentionally Placed</em>
               </h2>
               <p className="text-text-muted text-sm mt-4 leading-relaxed">
                 Serving the DMV for intimate celebrations to grand-scale galas — all with the same level of care and excellence.
@@ -273,7 +282,7 @@ export default function HomePage() {
             {services.map((s, i) => (
               <ScrollReveal key={s.num} delay={i * 0.08} direction="up">
                 <div className="service-card p-8 md:p-10 bg-ivory group">
-                  <span className="section-label">{s.num}</span>
+                  <span className="text-[0.62rem] tracking-[0.28em] uppercase font-medium" style={{ color: "#C9A878", fontFamily: "'Inter', sans-serif" }}>{s.num}</span>
                   <h3 className="font-display text-2xl md:text-3xl font-light text-plum mt-4 mb-4 group-hover:text-wine transition-colors duration-300"
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}>{s.title}</h3>
                   <p className="text-sm text-text-secondary leading-relaxed">{s.desc}</p>
@@ -295,12 +304,12 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto relative z-10">
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-12">
             <ScrollReveal direction="left">
-              <p className="section-label mb-3 flex items-center gap-3">
-                <span className="block w-6 h-px bg-rose/60" />Featured Work
+              <p className="section-label mb-3 flex items-center gap-3" style={{ color: "#C9A878" }}>
+                <span className="block w-6 h-px bg-gold/50" />Featured Work
               </p>
               <h2 className="font-display text-display-lg font-light text-plum"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                Created with Love,<br /><em className="italic text-rose">Blessed by Faith</em>
+                Created with Love,<br /><em className="italic" style={{ color: "#C9A878" }}>Blessed by Faith</em>
               </h2>
             </ScrollReveal>
             <ScrollReveal direction="right">
@@ -329,26 +338,26 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-lg mx-auto mb-16">
             <ScrollReveal>
-              <p className="section-label justify-center mb-4 flex items-center gap-3">
-                <span className="block w-6 h-px bg-rose/60" />Client Love
+              <p className="section-label justify-center mb-4 flex items-center gap-3" style={{ color: "#C9A878" }}>
+                <span className="block w-6 h-px bg-gold/50" />Client Love<span className="block w-6 h-px bg-gold/50" />
               </p>
               <h2 className="font-display text-display-lg font-light text-plum"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                What They Say<br /><em className="italic text-rose">After the Promise</em>
+                What They Say<br /><em className="italic" style={{ color: "#C9A878" }}>After the Promise</em>
               </h2>
             </ScrollReveal>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
               <ScrollReveal key={i} delay={i * 0.1} direction="up">
-                <div className="bg-cream p-8 md:p-10 border border-border relative hover:border-rose/40 transition-colors duration-300">
-                  <span className="block text-5xl text-rose/20 leading-none mb-4"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>&ldquo;</span>
+                <div className="bg-cream p-8 md:p-10 border border-border relative hover:border-gold/40 transition-colors duration-300">
+                  <span className="block text-5xl leading-none mb-4"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", color: "rgba(201,168,120,0.35)" }}>&ldquo;</span>
                   <p className="font-display text-lg italic text-plum leading-relaxed mb-6"
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}>{t.quote}</p>
                   <div className="border-t border-border pt-4">
                     <p className="text-[10px] tracking-[0.18em] uppercase text-text-primary font-medium">{t.name}</p>
-                    <p className="text-[9px] tracking-[0.12em] uppercase text-rose mt-1">{t.event}</p>
+                    <p className="text-[9px] tracking-[0.12em] uppercase mt-1" style={{ color: "#C9A878" }}>{t.event}</p>
                   </div>
                 </div>
               </ScrollReveal>
