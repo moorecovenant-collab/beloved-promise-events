@@ -11,8 +11,8 @@ const values = [
 ];
 
 const timeline = [
-  { label: "The Calling", desc: "Amyah discovered her love for decorating through peace — the kind only God gives. Every time she created, she felt it. This was the calling." },
-  { label: "The Name", desc: "Beloved Promise came naturally. Beloved is what Amyah means in Hebrew. Promise is what God guarantees. Together, they are the foundation." },
+  { label: "The Calling", desc: "I discovered my love for decorating through peace — the kind only God gives. Every time I created, I felt it. This was my calling." },
+  { label: "The Name", desc: "Beloved Promise came naturally. Beloved is what my name means in Hebrew. Promise is what God guarantees. Together, they are my foundation." },
   { label: "The Launch", desc: "Beloved Promise Events was launched in obedience — not fully knowing every detail, but trusting the One who does." },
   { label: "The Vision", desc: "To grow into a luxury decor agency serving clients across the DMV and beyond — including Christian leaders, galas, weddings, and milestone events." },
 ];
@@ -28,14 +28,14 @@ export default function AboutPage() {
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="section-label mb-6 flex items-center gap-3">
-                <span className="block w-6 h-px bg-rose/60" />About Amyah
+                <span className="block w-6 h-px bg-rose/60" />In My Own Words
               </motion.p>
               <div className="overflow-hidden mb-2">
                 <motion.h1 initial={{ y: "110%" }} animate={{ y: "0%" }}
                   transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   style={{ fontFamily: "'Great Vibes', cursive", fontSize: "clamp(3rem, 7vw, 6rem)" }}
                   className="block text-wine leading-none">
-                  She is
+                  I am
                 </motion.h1>
               </div>
               <div className="overflow-hidden mb-6">
@@ -49,7 +49,7 @@ export default function AboutPage() {
               <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.8 }}
                 className="text-text-secondary text-base md:text-lg leading-loose max-w-lg">
-                Amyah is a faith-rooted creative, a decorator, and the founder of Beloved Promise Events — a luxury event decorating company built on the unwavering promises of God.
+                I am a faith-rooted creative, a decorator, and the founder of Beloved Promise Events — a luxury event decorating company built on the unwavering promises of God.
               </motion.p>
             </div>
 
@@ -96,16 +96,16 @@ export default function AboutPage() {
             <ScrollReveal delay={0.2}>
               <div className="space-y-6 text-text-secondary text-sm md:text-base leading-loose">
                 <p>
-                  Beloved Promise Events didn&apos;t start with a business plan. It started with a feeling — the deep, quiet peace that Amyah experienced every time she picked up a ribbon, arranged a centerpiece, or styled a space. That peace was the signal. That peace was the calling.
+                  Beloved Promise Events didn&apos;t start with a business plan. It started with a feeling — the deep, quiet peace I experience every time I pick up a ribbon, arrange a centerpiece, or style a space. That peace was the signal. That peace was my calling.
                 </p>
                 <p>
-                  Amyah&apos;s name means <em className="italic text-plum">Beloved</em> in Hebrew. And she believes that&apos;s exactly who she is in the eyes of God — and who every client is too. The word &ldquo;Promise&rdquo; was added because that&apos;s what every event is: a promise fulfilled. A moment that was always meant to happen.
+                  My name means <em className="italic text-plum">Beloved</em> in Hebrew. And I believe that&apos;s exactly who I am in the eyes of God — and who every one of my clients is too. The word &ldquo;Promise&rdquo; was added because that&apos;s what every event I create is: a promise fulfilled. A moment that was always meant to happen.
                 </p>
                 <p>
                   This business is a ministry. Every client — believer or not — encounters something different when they work with Beloved Promise Events. Maybe they notice the peace. Maybe they feel the excellence. Maybe they ask why it&apos;s different. And prayerfully, they see Christ.
                 </p>
                 <p>
-                  Beloved Promise Events is rooted in the DMV, but the vision is far greater — luxury decor, destination events, and eventually a full-scale creative agency. One God-given promise at a time.
+                  I'm rooted in the DMV, but my vision is far greater — luxury decor, destination events, and eventually a full-scale creative agency. One God-given promise at a time.
                 </p>
 
                 <blockquote className="font-display text-xl italic text-plum border-l-2 border-rose/40 pl-5 my-8 leading-snug"
@@ -199,13 +199,13 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-text-secondary text-sm md:text-base leading-loose">
                 <p>
-                  Beloved Promise Events is open to all — but our heart is for kingdom-minded clients. Believers, Christian leaders, musicians, and families who want a decorator who prays over their event before setting up a single piece.
+                  I am open to all — but my heart is for kingdom-minded clients. Believers, Christian leaders, musicians, and families who want a decorator who prays over their event before setting up a single piece.
                 </p>
                 <p>
-                  We also welcome non-believing clients warmly. We don&apos;t preach — we serve. And prayerfully, through the excellence of the work and the warmth of the experience, they see something different.
+                  I also welcome non-believing clients warmly. I don&apos;t preach — I serve. And prayerfully, through the excellence of my work and the warmth of the experience, they see something different.
                 </p>
                 <p className="text-wine font-medium">
-                  What we will not do: environments or events centered around sin — explicit content, adult entertainment venues, or anything that directly conflicts with our faith values.
+                  What I will not do: environments or events centered around sin — explicit content, adult entertainment venues, or anything that directly conflicts with my faith values.
                 </p>
               </div>
             </ScrollReveal>

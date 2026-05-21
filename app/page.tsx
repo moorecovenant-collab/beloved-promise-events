@@ -230,9 +230,9 @@ export default function HomePage() {
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
               <div className="space-y-5 text-text-secondary text-sm md:text-base leading-loose mb-8">
-                <p>Beloved — that&apos;s what Amyah means in Hebrew. And that&apos;s exactly how every client is treated: beloved. Known. Seen. Worthy of something extraordinary.</p>
+                <p>Beloved — that&apos;s what my name means in Hebrew. And that&apos;s exactly how I treat every client: beloved. Known. Seen. Worthy of something extraordinary.</p>
                 <p>Beloved Promise Events was born out of Amyah&apos;s passion for creativity, her peace in decorating, and her obedience to God&apos;s calling on her life. This business is a ministry — and every beautifully designed space is a testament to His faithfulness.</p>
-                <p>Based in the DMV, Amyah crafts luxury event décor that is timeless, creative, and set apart — for clients who want their event to feel like a God-given promise fulfilled.</p>
+                <p>Based in the DMV, I craft luxury event décor that is timeless, creative, and set apart — for you, the client who wants your event to feel like a God-given promise fulfilled.</p>
               </div>
               <div className="flex flex-wrap gap-2 mb-8">
                 {["Faith-Based", "DMV Area", "Luxury Decor", "Balloon Artistry", "Floral Design", "Theme Styling"].map((tag) => (
