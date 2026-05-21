@@ -4,26 +4,26 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GrainOverlay from "@/components/ui/GrainOverlay";
 import CustomCursor from "@/components/ui/CustomCursor";
-import ChatWidget from "@/components/ui/ChatWidget";
-import MusicPlayer from "@/components/ui/MusicPlayer";
 
 export const metadata: Metadata = {
-  title: "Moore Covenant Productions | Built on Covenant. Established for More.",
+  title: "Beloved Promise Events | Faith-Based Event Decorating · DMV",
   description:
-    "Moore Covenant Productions is a cinematic creative media company specializing in brand storytelling, videography, creative direction, and visual identity. We create moments people carry with them.",
+    "Beloved Promise Events is a faith-rooted luxury event decorating company based in the DMV. We bring your vision to life — exactly as you imagined, if not better. His promises never fail.",
   keywords: [
-    "cinematic media",
-    "brand storytelling",
-    "videography",
-    "creative direction",
-    "visual identity",
-    "social media management",
-    "content strategy",
-    "photography",
+    "event decorating",
+    "event planner DMV",
+    "faith-based event planner",
+    "luxury event decor Washington DC",
+    "balloon decor Maryland",
+    "wedding decor Virginia",
+    "Christian event planner",
+    "beloved promise events",
+    "Amyah",
+    "event styling DMV",
   ],
   openGraph: {
-    title: "Moore Covenant Productions",
-    description: "Built on Covenant. Established for More.",
+    title: "Beloved Promise Events",
+    description: "Your Vision. His Promise. Delivered.",
     type: "website",
   },
 };
@@ -39,7 +39,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Great+Vibes&family=Inter:wght@300;400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -49,8 +49,6 @@ export default function RootLayout({
         <Navigation />
         <main>{children}</main>
         <Footer />
-        <ChatWidget />
-        <MusicPlayer />
       </body>
     </html>
   );

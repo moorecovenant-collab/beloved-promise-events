@@ -1,345 +1,265 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
-type FormData = {
-  name: string;
-  email: string;
-  phone: string;
-  type: string;
-  budget: string;
-  message: string;
-};
-
-const projectTypes = [
-  "Content Strategy",
-  "Social Media Management",
-  "Content Creation",
-  "Growth Strategy",
-  "1:1 Mentorship / Coaching",
-  "Website Building",
-  "Brand Building + Website",
-  "Content Day Production",
-  "Multiple Services",
-  "Not sure yet",
+const eventTypes = [
+  "Wedding / Engagement", "Birthday Celebration", "Baby Shower",
+  "Bridal Shower", "Gala / Formal Event", "Quinceañera / Sweet 16",
+  "Church / Ministry Event", "Corporate Event", "Graduation", "Other",
 ];
 
 const budgetRanges = [
-  "Under $1,000",
-  "$1,000 – $3,000",
-  "$3,000 – $7,500",
-  "$7,500 – $15,000",
-  "$15,000+",
-  "Let's discuss",
+  "Under $500", "$500 – $1,500", "$1,500 – $3,500",
+  "$3,500 – $7,500", "$7,500 – $10,000", "$10,000+",
+  "Not sure yet — let's talk",
 ];
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FormData>();
 
-  const onSubmit = async (data: FormData) => {
-    const res = await fetch("https://formspree.io/f/mzdwejlk", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (res.ok) setSubmitted(true);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
   };
 
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section className="relative pt-40 md:pt-52 pb-20 md:pb-28 px-6 md:px-10 lg:px-16 overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 80% 20%, rgba(196,151,74,0.05) 0%, transparent 60%)" }} />
-        <div className="max-w-[1400px] mx-auto relative z-10">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+      {/* PAGE HERO */}
+      <section className="pt-28 md:pt-36 pb-16 px-6 md:px-10 lg:px-16 bg-ivory overflow-hidden">
+        <div className="max-w-[1400px] mx-auto">
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="section-label mb-6 flex items-center gap-3"
-          >
-            <span className="block w-6 h-px bg-gold" />
-            Contact
+            className="section-label mb-6 flex items-center gap-3">
+            <span className="block w-6 h-px bg-rose/60" />Let&apos;s Connect
           </motion.p>
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: "110%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-display-xl font-light text-cream leading-tight"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              Tell us your story.
+          <div className="overflow-hidden mb-2">
+            <motion.h1 initial={{ y: "110%" }} animate={{ y: "0%" }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display text-display-2xl font-light text-plum leading-none"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              Tell Us Your
             </motion.h1>
           </div>
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: "110%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 1, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-display-xl font-light italic text-gold leading-tight"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              We&apos;ll help you tell it better.
+          <div className="overflow-hidden mb-8">
+            <motion.h1 initial={{ y: "110%" }} animate={{ y: "0%" }}
+              transition={{ duration: 1, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontFamily: "'Great Vibes', cursive", fontSize: "clamp(3rem, 7vw, 6rem)" }}
+              className="block text-rose leading-none">
+              Vision
             </motion.h1>
           </div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.9 }}
-            className="text-text-secondary text-base leading-loose max-w-xl mt-8"
-          >
-            We take on a limited number of clients each quarter to ensure everyone gets our full attention. If you&apos;re building something meaningful, let&apos;s connect.
+          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.8 }}
+            className="text-text-secondary text-base md:text-lg leading-loose max-w-2xl">
+            Your free consultation starts here. Fill out the form below and Amyah will reach out within 48 hours to schedule your vision call. We can&apos;t wait to hear what God has placed on your heart for this event.
           </motion.p>
         </div>
       </section>
 
-      {/* ─── CONTENT ─── */}
-      <section className="px-6 md:px-10 lg:px-16 pb-32 md:pb-44">
+      {/* MAIN CONTACT SECTION */}
+      <section className="py-10 md:py-16 px-6 md:px-10 lg:px-16 bg-cream">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-24">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 items-start">
+
             {/* Left info */}
             <ScrollReveal direction="left">
-              <div className="lg:sticky lg:top-32 space-y-12">
+              <div className="space-y-10">
+                {/* Info cards */}
+                {[
+                  {
+                    icon: "✦",
+                    title: "Free Consultation",
+                    desc: "Every booking starts with a free 30-minute consultation — no pressure, no commitment. Just a conversation about your vision.",
+                  },
+                  {
+                    icon: "✧",
+                    title: "Response Time",
+                    desc: "We respond to all inquiries within 48 hours. If you need something urgent, note it in your message.",
+                  },
+                  {
+                    icon: "✦",
+                    title: "Service Area",
+                    desc: "We are based in the DMV — Washington DC, Maryland, and Virginia. Travel is available for larger events.",
+                  },
+                ].map((info) => (
+                  <div key={info.title} className="flex items-start gap-5">
+                    <span className="text-gold text-xl mt-1 flex-shrink-0">{info.icon}</span>
+                    <div>
+                      <h3 className="font-display text-xl text-plum mb-1"
+                        style={{ fontFamily: "'Cormorant Garamond', serif" }}>{info.title}</h3>
+                      <p className="text-sm text-text-secondary leading-relaxed">{info.desc}</p>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Scripture */}
+                <blockquote className="font-display text-lg italic text-plum border-l-2 border-rose/30 pl-5 leading-relaxed"
+                  style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                  &ldquo;Commit to the Lord whatever you do, and he will establish your plans.&rdquo;
+                  <span className="block text-[10px] tracking-[0.15em] uppercase text-rose not-italic mt-2"
+                    style={{ fontFamily: "'Inter', sans-serif" }}>— Proverbs 16:3</span>
+                </blockquote>
+
+                {/* Social */}
                 <div>
-                  <p className="section-label mb-5 flex items-center gap-3">
-                    <span className="block w-6 h-px bg-gold" />
-                    How to Reach Us
-                  </p>
-                  <div className="space-y-5">
-                    <div>
-                      <p className="text-xs tracking-widest uppercase text-text-muted mb-1">Phone / Text</p>
-                      <a
-                        href="tel:3013776958"
-                        className="text-sm text-cream hover:text-gold transition-colors duration-300 font-medium"
-                      >
-                        (301) 377-6958
-                      </a>
-                    </div>
-                    <div>
-                      <p className="text-xs tracking-widest uppercase text-text-muted mb-1">Email</p>
-                      <a
-                        href="mailto:moorecovenant@gmail.com"
-                        className="text-sm text-cream hover:text-gold transition-colors duration-300 break-all"
-                      >
-                        moorecovenant@gmail.com
-                      </a>
-                    </div>
-                    <div>
-                      <p className="text-xs tracking-widests uppercase text-text-muted mb-1">Instagram</p>
-                      <a
-                        href="https://instagram.com/moore.covenant"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-cream hover:text-gold transition-colors duration-300"
-                      >
-                        @moore.covenant
-                      </a>
-                    </div>
-                    <div>
-                      <p className="text-xs tracking-widest uppercase text-text-muted mb-1">YouTube / TikTok</p>
-                      <a
-                        href="https://youtube.com/@moorefavor"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-cream hover:text-gold transition-colors duration-300"
-                      >
-                        @moorefavor
-                      </a>
-                    </div>
-                    <div>
-                      <p className="text-xs tracking-widest uppercase text-text-muted mb-1">Response Time</p>
-                      <p className="text-sm text-text-secondary">Within 24–48 hours</p>
-                    </div>
+                  <p className="text-[9px] tracking-[0.22em] uppercase text-text-muted mb-3">Follow Our Work</p>
+                  <div className="flex items-center gap-4">
+                    <a href="#" className="text-sm text-text-secondary hover:text-rose transition-colors duration-300">Instagram</a>
+                    <span className="text-border">·</span>
+                    <a href="#" className="text-sm text-text-secondary hover:text-rose transition-colors duration-300">TikTok</a>
+                    <span className="text-border">·</span>
+                    <a href="mailto:hello@belovedpromiseevents.com"
+                      className="text-sm text-text-secondary hover:text-rose transition-colors duration-300">Email</a>
                   </div>
                 </div>
 
-                <div>
-                  <p className="section-label mb-5 flex items-center gap-3">
-                    <span className="block w-6 h-px bg-gold" />
-                    What to Expect
-                  </p>
-                  <div className="space-y-5">
-                    {[
-                      { step: "01", text: "Submit this form with as much detail as you have." },
-                      { step: "02", text: "We review and reach out to schedule a free discovery call." },
-                      { step: "03", text: "We connect, listen, and confirm if we're the right fit." },
-                      { step: "04", text: "If it's a yes — we build something together." },
-                    ].map((item) => (
-                      <div key={item.step} className="flex gap-4">
-                        <span className="section-label shrink-0 mt-0.5">{item.step}</span>
-                        <p className="text-sm text-text-secondary leading-relaxed">{item.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="border-t border-border/40 pt-8">
-                  <p
-                    className="font-display text-xl italic text-gold/70 leading-snug"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    &ldquo;We don&apos;t just take your project — we take your vision personally.&rdquo;
-                  </p>
+                {/* Photo placeholder */}
+                <div className="photo-placeholder aspect-[4/3]">
+                  <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-rose/30" />
+                  <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-rose/30" />
+                  <div className="z-10 text-[10px] tracking-[0.18em] uppercase text-rose/50">Add event photo</div>
                 </div>
               </div>
             </ScrollReveal>
 
-            {/* Form */}
-            <ScrollReveal delay={0.2} direction="right">
-              <div className="flex items-start gap-4 p-5 border border-gold/20 bg-gold/5 mb-8">
-                <span className="text-gold shrink-0 mt-0.5">—</span>
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  <span className="text-gold">A note before you reach out: </span>
-                  Moore Covenant Productions is built on faith — that&apos;s where our work ethic and commitment to you come from. It&apos;s not a requirement for working together. If you value integrity and work done right, you&apos;re in the right place.
-                </p>
-              </div>
+            {/* Right — Form */}
+            <ScrollReveal direction="right">
               {submitted ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex flex-col items-start justify-center min-h-[400px] py-20"
-                >
-                  <div className="w-12 h-12 border border-gold flex items-center justify-center mb-8">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M4 10l5 5 8-8" stroke="#c4974a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <p className="section-label mb-4">Message Received</p>
-                  <h2
-                    className="font-display text-3xl md:text-4xl font-light text-cream leading-tight mb-5"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    Thank you for reaching out.
-                  </h2>
-                  <p className="text-text-secondary text-sm leading-relaxed max-w-md mb-6">
-                    We&apos;ve received your message and will be in touch within 24–48 hours. In the meantime, follow us on Instagram at <span className="text-gold">@moore.covenant</span>.
+                <div className="bg-ivory border border-border p-12 text-center">
+                  <span className="block text-5xl text-gold mb-6">✦</span>
+                  <span className="block text-4xl text-wine mb-4"
+                    style={{ fontFamily: "'Great Vibes', cursive" }}>Thank You</span>
+                  <h3 className="font-display text-2xl text-plum mb-4"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    Your Message Was Received
+                  </h3>
+                  <p className="text-text-secondary text-sm leading-loose max-w-sm mx-auto mb-6">
+                    Amyah will reach out within 48 hours to schedule your free consultation. We&apos;re excited to hear about your vision — God has something beautiful in store.
                   </p>
-                  <p className="text-text-secondary text-sm">
-                    Or text/call directly: <a href="tel:3013776958" className="text-gold">(301) 377-6958</a>
+                  <p className="font-display italic text-rose/70 text-base"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    &ldquo;For I know the plans I have for you...&rdquo; — Jeremiah 29:11
                   </p>
-                </motion.div>
+                </div>
               ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
-                  {/* Name + Phone */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
+                <form onSubmit={handleSubmit} className="bg-ivory border border-border p-8 md:p-10 space-y-6">
+                  <h3 className="font-display text-2xl text-plum"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    Consultation Request
+                  </h3>
+
+                  {/* Name row */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block section-label mb-3">Your Name *</label>
-                      <input
-                        {...register("name", { required: "Name is required" })}
-                        type="text"
-                        placeholder="First and last name"
-                        className="w-full bg-transparent border border-border/60 focus:border-gold text-cream placeholder-text-muted px-4 py-3.5 text-sm outline-none transition-colors duration-300"
-                      />
-                      {errors.name && <p className="text-xs text-red-500/70 mt-2">{errors.name.message}</p>}
+                      <label className="form-label">First Name *</label>
+                      <input type="text" required placeholder="Your first name" className="form-input" />
                     </div>
                     <div>
-                      <label className="block section-label mb-3">Phone Number</label>
-                      <input
-                        {...register("phone")}
-                        type="tel"
-                        placeholder="(301) 000-0000"
-                        className="w-full bg-transparent border border-border/60 focus:border-gold text-cream placeholder-text-muted px-4 py-3.5 text-sm outline-none transition-colors duration-300"
-                      />
+                      <label className="form-label">Last Name *</label>
+                      <input type="text" required placeholder="Your last name" className="form-input" />
                     </div>
                   </div>
 
-                  {/* Email */}
-                  <div>
-                    <label className="block section-label mb-3">Email Address *</label>
-                    <input
-                      {...register("email", {
-                        required: "Email is required",
-                        pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Enter a valid email" },
-                      })}
-                      type="email"
-                      placeholder="your@email.com"
-                      className="w-full bg-transparent border border-border/60 focus:border-gold text-cream placeholder-text-muted px-4 py-3.5 text-sm outline-none transition-colors duration-300"
-                    />
-                    {errors.email && <p className="text-xs text-red-500/70 mt-2">{errors.email.message}</p>}
+                  {/* Contact row */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="form-label">Email Address *</label>
+                      <input type="email" required placeholder="your@email.com" className="form-input" />
+                    </div>
+                    <div>
+                      <label className="form-label">Phone Number</label>
+                      <input type="tel" placeholder="(000) 000-0000" className="form-input" />
+                    </div>
                   </div>
 
-                  {/* Project type */}
+                  {/* Event type */}
                   <div>
-                    <label className="block section-label mb-3">Service Interested In *</label>
-                    <select
-                      {...register("type", { required: "Please select a service" })}
-                      className="w-full bg-charcoal border border-border/60 focus:border-gold text-cream px-4 py-3.5 text-sm outline-none transition-colors duration-300 appearance-none cursor-pointer"
-                      style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239a9590' strokeWidth='1.5' fill='none' strokeLinecap='round'/%3E%3C/svg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 1rem center" }}
-                    >
-                      <option value="" className="bg-charcoal">Select a service...</option>
-                      {projectTypes.map((type) => (
-                        <option key={type} value={type} className="bg-charcoal">{type}</option>
-                      ))}
+                    <label className="form-label">Event Type *</label>
+                    <select required className="form-input">
+                      <option value="">Select event type...</option>
+                      {eventTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                     </select>
-                    {errors.type && <p className="text-xs text-red-500/70 mt-2">{errors.type.message}</p>}
+                  </div>
+
+                  {/* Date + Location */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="form-label">Event Date</label>
+                      <input type="date" className="form-input" />
+                    </div>
+                    <div>
+                      <label className="form-label">Venue / Location</label>
+                      <input type="text" placeholder="City, venue name, or TBD" className="form-input" />
+                    </div>
+                  </div>
+
+                  {/* Guest count */}
+                  <div>
+                    <label className="form-label">Expected Guest Count</label>
+                    <input type="text" placeholder="Approximate number of guests" className="form-input" />
                   </div>
 
                   {/* Budget */}
                   <div>
-                    <label className="block section-label mb-3">Approximate Budget</label>
-                    <select
-                      {...register("budget")}
-                      className="w-full bg-charcoal border border-border/60 focus:border-gold text-cream px-4 py-3.5 text-sm outline-none transition-colors duration-300 appearance-none cursor-pointer"
-                      style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239a9590' strokeWidth='1.5' fill='none' strokeLinecap='round'/%3E%3C/svg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 1rem center" }}
-                    >
-                      <option value="" className="bg-charcoal">Select a range...</option>
-                      {budgetRanges.map((range) => (
-                        <option key={range} value={range} className="bg-charcoal">{range}</option>
+                    <label className="form-label">Estimated Budget *</label>
+                    <select required className="form-input">
+                      <option value="">Select budget range...</option>
+                      {budgetRanges.map((b) => <option key={b} value={b}>{b}</option>)}
+                    </select>
+                  </div>
+
+                  {/* Vision */}
+                  <div>
+                    <label className="form-label">Describe Your Vision *</label>
+                    <textarea required rows={5} placeholder="Tell us about your dream event — the theme, the vibe, the colors, the feeling you want guests to have. The more detail, the better."
+                      className="form-input resize-none" />
+                  </div>
+
+                  {/* How did you hear */}
+                  <div>
+                    <label className="form-label">How Did You Hear About Us?</label>
+                    <select className="form-input">
+                      <option value="">Select...</option>
+                      {["Instagram", "TikTok", "Word of Mouth / Referral", "Google Search",
+                        "Attended an Event We Decorated", "Other"].map((s) => (
+                        <option key={s} value={s}>{s}</option>
                       ))}
                     </select>
                   </div>
 
-                  {/* Message */}
-                  <div>
-                    <label className="block section-label mb-3">Tell Us About Your Vision *</label>
-                    <textarea
-                      {...register("message", { required: "Please tell us about your project" })}
-                      rows={6}
-                      placeholder="Who are you, what are you building, and what do you need? The more you share, the better we can serve you."
-                      className="w-full bg-transparent border border-border/60 focus:border-gold text-cream placeholder-text-muted px-4 py-3.5 text-sm outline-none transition-colors duration-300 resize-none leading-relaxed"
-                    />
-                    {errors.message && <p className="text-xs text-red-500/70 mt-2">{errors.message.message}</p>}
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-primary w-full sm:w-auto justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <span>{isSubmitting ? "Sending..." : "Send Your Message"}</span>
-                    {!isSubmitting && (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="relative z-10">
-                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    )}
-                  </button>
-
-                  <div className="p-4 border border-gold/20 bg-gold/5">
+                  {/* Faith note */}
+                  <div className="bg-blush border border-rose/20 p-4">
                     <p className="text-xs text-text-secondary leading-relaxed">
-                      <span className="text-gold">Commitment Notice: </span>
-                      All contracts require a minimum 3-month commitment.
+                      <span className="text-rose font-medium">A note from Amyah:</span> Every inquiry is received with gratitude and covered in prayer. Whether you&apos;re a believer or not, you will be treated with the same excellence, warmth, and intentionality. Welcome to Beloved Promise Events.
                     </p>
                   </div>
 
-                  <p className="text-xs text-text-muted">
-                    Prefer to text or call?{" "}
-                    <a href="tel:3013776958" className="text-gold hover:text-gold-light transition-colors">
-                      (301) 377-6958
-                    </a>
-                  </p>
+                  <button type="submit" className="btn-primary w-full justify-center">
+                    <span>Send My Consultation Request</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="relative z-10">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
                 </form>
               )}
             </ScrollReveal>
           </div>
+        </div>
+      </section>
+
+      {/* PROMISE STRIP */}
+      <section className="py-14 md:py-20 px-6 md:px-10 lg:px-16 bg-wine">
+        <div className="max-w-[1000px] mx-auto text-center">
+          <ScrollReveal>
+            <p className="font-display text-xl md:text-2xl italic font-light text-cream/80 leading-relaxed"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              &ldquo;God can be trusted to keep <span className="text-gold not-italic">his promise.</span>&rdquo;
+            </p>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-gold/60 mt-3">Hebrews 10:23 · The Foundation of Everything We Do</p>
+          </ScrollReveal>
         </div>
       </section>
     </>

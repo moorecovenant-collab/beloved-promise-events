@@ -10,9 +10,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/portfolio", label: "Work" },
-  { href: "/photography", label: "Photography" },
-  { href: "/journal", label: "Journal" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -27,9 +25,7 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -45,7 +41,7 @@ export default function Navigation() {
         className={clsx(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
           scrolled
-            ? "bg-black/90 backdrop-blur-md border-b border-border/40"
+            ? "bg-ivory/95 backdrop-blur-md border-b border-border shadow-sm"
             : "bg-transparent"
         )}
       >
@@ -54,13 +50,13 @@ export default function Navigation() {
             {/* Logo */}
             <Link href="/" className="group flex flex-col leading-none">
               <span
-                className="font-display text-xl md:text-2xl font-light tracking-wider text-cream group-hover:text-gold transition-colors duration-300"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                className="text-2xl md:text-3xl text-wine group-hover:text-rose transition-colors duration-300"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
               >
-                MCP
+                Beloved Promise
               </span>
-              <span className="text-[9px] tracking-[0.3em] uppercase text-text-secondary group-hover:text-gold/70 transition-colors duration-300">
-                Moore Covenant
+              <span className="text-[8px] tracking-[0.3em] uppercase text-text-muted group-hover:text-rose/70 transition-colors duration-300 -mt-0.5">
+                Events
               </span>
             </Link>
 
@@ -79,29 +75,25 @@ export default function Navigation() {
 
             {/* CTA + Hamburger */}
             <div className="flex items-center gap-4">
-              <Link
-                href="/contact"
-                className="hidden md:inline-flex btn-primary text-[10px] py-2.5 px-5"
-              >
-                <span>Start a Project</span>
+              <Link href="/contact" className="hidden md:inline-flex btn-primary text-[9px] py-2.5 px-5">
+                <span>Book a Consultation</span>
               </Link>
-
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="md:hidden flex flex-col justify-center items-end gap-[5px] w-8 h-8 group"
+                className="md:hidden flex flex-col justify-center items-end gap-[5px] w-8 h-8"
                 aria-label="Toggle menu"
               >
                 <motion.span
                   animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                  className="block h-px bg-cream w-6 origin-center transition-all"
+                  className="block h-px bg-plum w-6 origin-center"
                 />
                 <motion.span
                   animate={menuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-                  className="block h-px bg-cream w-4"
+                  className="block h-px bg-plum w-4"
                 />
                 <motion.span
                   animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                  className="block h-px bg-cream w-6 origin-center transition-all"
+                  className="block h-px bg-plum w-6 origin-center"
                 />
               </button>
             </div>
@@ -117,9 +109,15 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-black md:hidden"
+            className="fixed inset-0 z-40 bg-plum md:hidden"
           >
             <div className="flex flex-col items-center justify-center h-full gap-10">
+              <span
+                className="text-5xl text-gold/60 mb-2"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
+              >
+                Beloved Promise
+              </span>
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
@@ -132,7 +130,7 @@ export default function Navigation() {
                     href={link.href}
                     className={clsx(
                       "font-display text-4xl font-light tracking-wide transition-colors duration-300",
-                      pathname === link.href ? "text-gold" : "text-cream hover:text-gold"
+                      pathname === link.href ? "text-gold" : "text-cream hover:text-rose-light"
                     )}
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}
                   >
@@ -140,14 +138,9 @@ export default function Navigation() {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-6"
-              >
-                <Link href="/contact" className="btn-primary">
-                  <span>Start a Project</span>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-4">
+                <Link href="/contact" className="btn-ghost-light">
+                  <span>Book a Consultation</span>
                 </Link>
               </motion.div>
             </div>

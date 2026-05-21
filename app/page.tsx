@@ -2,351 +2,193 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import AnimatedText from "@/components/ui/AnimatedText";
 
-const stats = [
-  { value: "60M+", label: "Total Views Generated" },
-  { value: "50M+", label: "Total Likes Generated" },
-  { value: "100K+", label: "Followers Grown" },
-  { value: "1,000+", label: "High-Performing Videos" },
+const pillars = [
+  {
+    icon: "✦",
+    title: "Rooted in Faith",
+    desc: "Every event we touch is first lifted in prayer. We believe God's hand is in the details — because He is a God of beauty, order, and promise.",
+  },
+  {
+    icon: "✧",
+    title: "Your Vision, Honored",
+    desc: "You dreamed it. We deliver it — exactly as you imagined, if not more breathtaking. Your vision is sacred to us.",
+  },
+  {
+    icon: "✦",
+    title: "Luxury Without Compromise",
+    desc: "Timeless, stunning, set apart. Every installation is built to leave guests speechless and take the room's breath away.",
+  },
 ];
 
 const services = [
-  { number: "01", title: "Content Strategy", desc: "Strategic content calendars mapped to your brand voice, audience, and goals — consistency that converts." },
-  { number: "02", title: "Social Management", desc: "Fully managed posting, engagement, community building, and monthly reporting — we handle it all." },
-  { number: "03", title: "Content Creation", desc: "Scroll-stopping visuals, captions, and short-form video crafted to grow your audience and your revenue." },
-  { number: "04", title: "Growth Strategy", desc: "Data-driven strategy sessions, analytics review, and platform-specific roadmaps built for real growth." },
-  { number: "05", title: "Brand Building", desc: "Custom brand identity, logo, and website that positions you as the authority in your space." },
-  { number: "06", title: "Website Building", desc: "Clean, conversion-focused websites built to represent your brand at the highest level — designed, developed, and launched." },
-  { number: "07", title: "1:1 Mentorship", desc: "Private coaching for creators and entrepreneurs who want to grow their platform with purpose." },
+  { num: "01", title: "Event Décor & Styling", desc: "Full-service decorating that transforms any space into a breathtaking environment — from intimate gatherings to grand galas." },
+  { num: "02", title: "Balloon Artistry", desc: "Organic balloon arches, garlands, columns, and ceilings. Modern luxury balloon design that elevates any event aesthetic." },
+  { num: "03", title: "Backdrop & Floral Design", desc: "Custom backdrops, floral walls, and fresh or faux florals curated to your theme, palette, and vision." },
+  { num: "04", title: "Theme Consultation", desc: "Not sure what you want? Let's build it together. We help you find and define your theme, then execute it flawlessly." },
 ];
 
-const values = [
-  { letter: "C", name: "Covenant First", desc: "We honor our word above convenience and operate with unwavering commitment to every client we serve." },
-  { letter: "O", name: "Operational Excellence", desc: "We build with precision, discipline, and excellence — as unto the Lord, not just the client." },
-  { letter: "V", name: "Visionary Stewardship", desc: "We steward people, resources, and opportunities with foresight, responsibility, and long-term thinking." },
-  { letter: "E", name: "Ethical Integrity", desc: "Our decisions are anchored in truth. Our foundation is unshakeable — no shortcuts, no compromise." },
-  { letter: "N", name: "Noble Leadership", desc: "We lead with humility, accountability, and service-first authority — strength that uplifts, not overpowers." },
-  { letter: "A", name: "Accountability", desc: "We take full ownership of outcomes and uphold the highest standards — to our clients and to God." },
-  { letter: "N", name: "Next-Gen Mindset", desc: "We think generationally — building beyond today for those who come after us and the legacy we leave." },
-  { letter: "T", name: "Trust", desc: "We cultivate trust through consistency, transparency, and faithfulness. Trust is earned here — and it is." },
+const testimonials = [
+  {
+    quote: "Amyah turned my baby shower into something I still can't stop thinking about. Every detail was perfect — exactly what I pictured, even better.",
+    name: "Client Name",
+    event: "Baby Shower · Silver Spring, MD",
+  },
+  {
+    quote: "She understood my vision from the first conversation. The day of, I walked in and literally cried. It was everything and more.",
+    name: "Client Name",
+    event: "Birthday Celebration · Washington, DC",
+  },
+  {
+    quote: "Faith, professionalism, and creativity all in one. Beloved Promise Events is the real deal.",
+    name: "Client Name",
+    event: "Gala · Northern Virginia",
+  },
 ];
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section
-        ref={heroRef}
-        className="relative min-h-screen flex items-center overflow-hidden pt-20"
-      >
-        <motion.div
-          style={{ y: heroY, scale: heroScale }}
-          className="absolute inset-0 z-0"
-        >
-          <div
-            className="absolute inset-0 z-10"
-            style={{
-              background:
-                "linear-gradient(to bottom, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.3) 40%, rgba(8,8,8,0.8) 80%, rgba(8,8,8,1) 100%)",
-            }}
-          />
-          <Image
-            src="/metro-1.jpg"
-            alt="Moore Covenant Productions"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-        </motion.div>
-
-        {/* Decorative lines */}
-        <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 2, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute top-1/3 left-0 h-px w-full bg-gradient-to-r from-transparent via-gold/20 to-transparent origin-left"
-          />
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 2, delay: 1.7, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-1/3 left-0 h-px w-full bg-gradient-to-r from-transparent via-gold/10 to-transparent origin-right"
-          />
+      {/* HERO */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-ivory">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blush/60 to-transparent" />
+          <div className="absolute top-1/4 right-8 md:right-16 lg:right-24 w-[320px] md:w-[400px] lg:w-[480px] aspect-[3/4]">
+            <div className="photo-placeholder w-full h-full relative">
+              <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-rose/40" />
+              <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-rose/40" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 z-10">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" opacity="0.45">
+                  <circle cx="14" cy="10" r="5" stroke="#BE7B8E" strokeWidth="1.5"/>
+                  <path d="M4 27c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#BE7B8E" strokeWidth="1.5"/>
+                </svg>
+                <span className="text-rose/60 text-[10px] tracking-[0.2em] uppercase text-center px-4">Add Amyah photo here</span>
+              </div>
+            </div>
+          </div>
+          <motion.div animate={{ y: [0,-14,0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/3 left-10 w-3 h-3 rounded-full bg-gold/30 hidden lg:block" />
+          <motion.div animate={{ y: [0,10,0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            className="absolute bottom-2/5 left-1/4 w-2 h-2 rounded-full bg-rose/30 hidden lg:block" />
         </div>
 
-        {/* Content — two-column */}
-        <motion.div
-          style={{ opacity: heroOpacity }}
-          className="relative z-20 w-full max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
-        >
-          {/* Left */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex items-center gap-3 mb-8"
-            >
-              <span className="block w-8 h-px bg-gold" />
-              <span className="section-label">Results-Driven Social Media Growth</span>
+        <motion.div style={{ opacity: heroOpacity }}
+          className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 py-24 md:py-32">
+          <div className="max-w-[58%] lg:max-w-[52%]">
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex items-center gap-3 mb-8">
+              <span className="block w-8 h-px bg-rose/60" />
+              <span className="section-label">Faith-Based Event Decorating · DMV</span>
             </motion.div>
 
-            <div className="overflow-hidden mb-2">
-              <motion.h1
-                initial={{ y: "110%" }}
-                animate={{ y: "0%" }}
-                transition={{ duration: 1.1, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-display-2xl font-light text-cream leading-none"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Your Story.
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden mb-2">
-              <motion.h1
-                initial={{ y: "110%" }}
-                animate={{ y: "0%" }}
-                transition={{ duration: 1.1, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-display-2xl font-light text-cream leading-none"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Your <em className="italic text-gold">Legacy.</em>
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden mb-8">
-              <motion.h1
-                initial={{ y: "110%" }}
-                animate={{ y: "0%" }}
-                transition={{ duration: 1.1, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-display-2xl font-light text-cream leading-none"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Your Covenant.
-              </motion.h1>
-            </div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}>
+              <span className="block text-wine leading-none"
+                style={{ fontFamily: "'Great Vibes', cursive", fontSize: "clamp(3.5rem, 8vw, 7rem)" }}>
+                Beloved
+              </span>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}>
+              <span className="block text-rose leading-none"
+                style={{ fontFamily: "'Great Vibes', cursive", fontSize: "clamp(3.5rem, 8vw, 7rem)" }}>
+                Promise
+              </span>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-8">
+              <h1 className="font-display text-display-xl font-light text-plum leading-none"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                Events
+              </h1>
+            </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 1.2 }}
-              className="text-text-secondary text-sm md:text-base leading-loose max-w-md mb-5"
-            >
-              Faith-driven social media management and storytelling for the called, the committed, and the kingdom-minded entrepreneur.
+            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 1.0 }}
+              className="text-text-secondary text-base md:text-lg leading-relaxed max-w-md mb-4">
+              Your vision. His promise. Delivered — exactly as you imagined, if not more beautiful than you dreamed.
             </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.4 }}
-              className="font-display text-base italic text-gold/70 pl-4 border-l border-gold/40 mb-8 md:mb-10"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              "I will establish my covenant between me and you and your descendants after you, for an everlasting covenant." — Genesis 17:7
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="font-display text-base italic text-rose/70 pl-4 border-l-2 border-rose/30 mb-8 md:mb-10 leading-relaxed max-w-sm"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              &ldquo;Let us hold tightly without wavering to the hope we affirm, for God can be trusted to keep his promise.&rdquo;
+              <br />
+              <span className="text-[10px] tracking-[0.15em] uppercase text-gold not-italic" style={{ fontFamily: "'Inter', sans-serif" }}>Hebrews 10:23 NLT</span>
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 1.5 }}
-              className="flex flex-col sm:flex-row items-start gap-4"
-            >
-              <Link href="/contact" className="btn-primary">
-                <span>Start Your Covenant</span>
-              </Link>
-              <Link href="/portfolio" className="btn-ghost">
-                <span>See the Results</span>
-              </Link>
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 1.35 }}
+              className="flex flex-col sm:flex-row items-start gap-4">
+              <Link href="/contact" className="btn-primary"><span>Book a Consultation</span></Link>
+              <Link href="/gallery" className="btn-outline"><span>View Our Work</span></Link>
             </motion.div>
           </div>
-
-          {/* Right — Hero lifestyle */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative aspect-[3/4] max-h-[75vh] w-full max-w-md mx-auto lg:mx-0"
-          >
-            <div className="w-full h-full border border-gold/15 relative overflow-hidden">
-              <Image
-                src="/metro-1.jpg"
-                alt="Elijah Moore — Founder, Moore Covenant Productions"
-                fill
-                className="object-cover object-center"
-                priority
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.75) 100%)" }} />
-              <div className="absolute bottom-5 left-5 bg-black/80 px-3 py-1.5">
-                <span className="text-[9px] tracking-[0.16em] uppercase text-gold">Elijah Moore · Founder</span>
-              </div>
-              <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-gold/30" />
-              <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/30" />
-            </div>
-          </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.5, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-        >
-          <p className="text-[10px] tracking-[0.3em] uppercase text-text-muted">Scroll</p>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ delay: 2.2, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+          <motion.div animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-10 bg-gradient-to-b from-gold/50 to-transparent"
-          />
+            className="w-px h-10 bg-gradient-to-b from-rose/50 to-transparent" />
+          <p className="text-[9px] tracking-[0.3em] uppercase text-text-muted">Scroll</p>
         </motion.div>
       </section>
 
-      {/* ─── STATS BAR ─── */}
-      <section className="bg-dark border-y border-border/40">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-border/40">
-            {stats.map((stat, i) => (
-              <ScrollReveal key={stat.label} delay={i * 0.08} direction="up">
-                <div className="text-center py-8 px-6">
-                  <p
-                    className="font-display text-4xl md:text-5xl font-light text-gold leading-none mb-2"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    {stat.value}
-                  </p>
-                  <p className="text-[9px] tracking-[0.2em] uppercase text-text-muted">{stat.label}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+      {/* SCRIPTURE BANNER */}
+      <section className="bg-wine py-14 md:py-20 overflow-hidden relative">
+        <div className="absolute inset-0 pointer-events-none opacity-10">
+          <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-gold/20 -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-rose/20 translate-x-1/3 translate-y-1/3" />
+        </div>
+        <div className="max-w-[1000px] mx-auto px-6 md:px-10 text-center relative z-10">
+          <ScrollReveal direction="none">
+            <span className="block text-gold/50 mb-4"
+              style={{ fontFamily: "'Great Vibes', cursive", fontSize: "clamp(2rem, 4vw, 3.5rem)" }}>
+              His promises never fail
+            </span>
+            <p className="font-display text-xl md:text-2xl lg:text-3xl italic font-light text-cream/90 leading-relaxed mb-4"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              &ldquo;Let us hold tightly without wavering to the hope we affirm,{" "}
+              <span className="text-gold not-italic">for God can be trusted to keep his promise.</span>&rdquo;
+            </p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-gold/70">Hebrews 10:23 · New Living Translation</p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* ─── MANIFESTO / ABOUT TEASER ─── */}
-      <section className="py-24 md:py-36 lg:py-44 px-6 md:px-10 lg:px-16 bg-black">
+      {/* THREE PILLARS */}
+      <section className="py-20 md:py-32 px-6 md:px-10 lg:px-16 bg-ivory">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
-            {/* Photo */}
-            <ScrollReveal direction="left">
-              <div className="relative aspect-[2/3] max-w-lg overflow-hidden border border-gold/15">
-                <Image
-                  src="/metro-2.jpg"
-                  alt="Elijah Moore — Moore Covenant Productions"
-                  fill
-                  className="object-cover object-center"
-                />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 55%, rgba(8,8,8,0.65) 100%)" }} />
-                <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-gold/30" />
-                <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/30" />
-              </div>
-            </ScrollReveal>
-
-            {/* Bio */}
-            <div>
-              <ScrollReveal>
-                <p className="section-label mb-6">My Story</p>
-              </ScrollReveal>
-              <AnimatedText
-                text="Built From Purpose."
-                tag="h2"
-                className="font-display text-display-lg font-light text-cream leading-tight"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              />
-              <AnimatedText
-                text="Not Accident."
-                tag="h2"
-                className="font-display text-display-lg font-light italic text-gold leading-tight"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                delay={0.2}
-              />
-
-              <ScrollReveal delay={0.4}>
-                <div className="mt-8 space-y-5 text-text-secondary text-sm md:text-base leading-loose">
-                  <p>
-                    I didn&apos;t stumble into this. I was called to it. There was a moment — not long ago — when I looked around and saw people with something real to say, businesses with something real to offer, and leaders with something real to give — but no one could see them. They were invisible. And I knew that was something I could fix.
-                  </p>
-                  <p>
-                    I&apos;m Elijah Moore — storyteller, strategist, and founder of Moore Covenant Productions. I built this company on a covenant: a promise that every brand we touch will be seen, felt, and remembered. Faith isn&apos;t just a backdrop to what I do — it&apos;s the foundation.
-                  </p>
-                  <p>
-                    I&apos;ve helped creators, beauty brands, and entrepreneurs generate over <em className="text-cream">60 million views</em>, grow six-figure followings, and build digital presences that convert — not just impress.
-                  </p>
-                </div>
-
-                <blockquote
-                  className="font-display text-xl italic text-cream border-l-2 border-gold pl-5 my-8 leading-snug"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  &ldquo;My story is who I am.<br />Are you ready to tell yours?&rdquo;
-                </blockquote>
-
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {["Faith-Driven", "Storytelling", "Social Strategy", "Brand Building", "Coaching"].map((tag) => (
-                    <span key={tag} className="px-3 py-1.5 border border-gold/15 text-[10px] tracking-[0.14em] uppercase text-gold bg-gold/5">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <Link href="/about" className="btn-primary">
-                  <span>Read the Full Story</span>
-                </Link>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── COVENANT FRAMEWORK ─── */}
-      <section className="py-24 md:py-36 px-6 md:px-10 lg:px-16 bg-dark border-y border-border/40">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-16 md:mb-20">
+          <div className="text-center max-w-lg mx-auto mb-16">
             <ScrollReveal>
-              <p className="section-label justify-center mb-4 flex">
-                <span className="block w-6 h-px bg-gold mr-3 mt-[6px]" />
-                What We Stand On
+              <p className="section-label justify-center mb-4 flex items-center gap-3">
+                <span className="block w-6 h-px bg-rose/60" />What Sets Us Apart<span className="block w-6 h-px bg-rose/60" />
               </p>
-              <h2
-                className="font-display text-display-lg font-light text-cream"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                The <em className="italic text-gold">Covenant</em> Framework
+              <h2 className="font-display text-display-lg font-light text-plum leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                Decorated by Faith,<br /><em className="italic text-rose">Designed for You</em>
               </h2>
-              <p
-                className="font-display italic text-gold/60 mt-3 text-lg"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Built on Covenant. Established for More.
-              </p>
             </ScrollReveal>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border/40">
-            {values.map((v, i) => (
-              <ScrollReveal key={v.letter + i} delay={i * 0.06} direction="up">
-                <div className="bg-black p-8 md:p-10 group hover:bg-gold/5 transition-colors duration-300 relative">
-                  <span
-                    className="absolute top-3 right-4 font-display text-5xl font-light text-gold/10 leading-none"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    {v.letter}
-                  </span>
-                  <p className="text-[11px] tracking-[0.16em] uppercase text-gold font-medium mb-3 relative z-10">{v.name}</p>
-                  <p className="text-xs text-text-muted leading-relaxed relative z-10">{v.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+            {pillars.map((p, i) => (
+              <ScrollReveal key={p.title} delay={i * 0.12} direction="up">
+                <div className="service-card p-8 md:p-10 text-center group">
+                  <span className="block text-2xl text-gold mb-5">{p.icon}</span>
+                  <h3 className="font-display text-2xl md:text-3xl font-light text-plum mb-4 group-hover:text-wine transition-colors duration-300"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>{p.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">{p.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -354,136 +196,189 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SERVICES OVERVIEW ─── */}
-      <section className="py-24 md:py-36 px-6 md:px-10 lg:px-16 bg-black">
+      {/* ABOUT AMYAH TEASER */}
+      <section className="py-20 md:py-36 px-6 md:px-10 lg:px-16 bg-cream">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
+          <ScrollReveal direction="left">
+            <div className="relative aspect-[3/4] max-w-md overflow-visible">
+              <div className="photo-placeholder w-full h-full">
+                <div className="absolute top-5 left-5 w-8 h-8 border-t-2 border-l-2 border-rose/30" />
+                <div className="absolute bottom-5 right-5 w-8 h-8 border-b-2 border-r-2 border-rose/30" />
+                <div className="z-10 flex flex-col items-center gap-2">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" opacity="0.5">
+                    <circle cx="12" cy="8" r="4" stroke="#BE7B8E" strokeWidth="1.5"/>
+                    <path d="M3 21c0-4.971 4.029-9 9-9s9 4.029 9 9" stroke="#BE7B8E" strokeWidth="1.5"/>
+                  </svg>
+                  <span className="text-rose/60 text-[10px] tracking-[0.2em] uppercase">Amyah — Founder</span>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-wine text-cream px-5 py-3 shadow-luxury z-10">
+                <span className="text-[9px] tracking-[0.2em] uppercase" style={{ color: "#C9A878" }}>Faith · Vision · Beauty</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <div>
+            <ScrollReveal>
+              <p className="section-label mb-6 flex items-center gap-3">
+                <span className="block w-6 h-px bg-rose/60" />Meet Amyah
+              </p>
+              <h2 className="font-display text-display-lg font-light text-plum leading-tight mb-6"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                The Name Means<br /><em className="italic text-rose">Beloved</em>
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2}>
+              <div className="space-y-5 text-text-secondary text-sm md:text-base leading-loose mb-8">
+                <p>Beloved — that&apos;s what Amyah means in Hebrew. And that&apos;s exactly how every client is treated: beloved. Known. Seen. Worthy of something extraordinary.</p>
+                <p>Beloved Promise Events was born out of Amyah&apos;s passion for creativity, her peace in decorating, and her obedience to God&apos;s calling on her life. This business is a ministry — and every beautifully designed space is a testament to His faithfulness.</p>
+                <p>Based in the DMV, Amyah crafts luxury event décor that is timeless, creative, and set apart — for clients who want their event to feel like a God-given promise fulfilled.</p>
+              </div>
+              <div className="flex flex-wrap gap-2 mb-8">
+                {["Faith-Based", "DMV Area", "Luxury Decor", "Balloon Artistry", "Floral Design", "Theme Styling"].map((tag) => (
+                  <span key={tag} className="px-3 py-1.5 border border-rose/20 text-[9px] tracking-[0.14em] uppercase text-rose bg-blush">{tag}</span>
+                ))}
+              </div>
+              <Link href="/about" className="btn-primary"><span>Amyah&apos;s Story</span></Link>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES PREVIEW */}
+      <section className="py-20 md:py-36 px-6 md:px-10 lg:px-16 bg-ivory">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-xl mx-auto mb-16">
             <ScrollReveal>
-              <p className="section-label justify-center mb-4 flex">
-                <span className="block w-6 h-px bg-gold mr-3 mt-[6px]" />
-                What We Do
+              <p className="section-label justify-center mb-4 flex items-center gap-3">
+                <span className="block w-6 h-px bg-rose/60" />What We Offer
+              </p>
+              <h2 className="font-display text-display-lg font-light text-plum"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                Every Detail,<br /><em className="italic text-rose">Intentionally Placed</em>
+              </h2>
+              <p className="text-text-muted text-sm mt-4 leading-relaxed">
+                Serving the DMV for intimate celebrations to grand-scale galas — all with the same level of care and excellence.
               </p>
             </ScrollReveal>
-            <AnimatedText
-              text="Built to Elevate"
-              tag="h2"
-              className="font-display text-display-lg font-light text-cream"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            />
-            <ScrollReveal delay={0.3}>
-              <p className="text-text-muted text-sm mt-4">Every service is customized. Prices reflect starting rates — book a call and we&apos;ll build around your goals.</p>
-            </ScrollReveal>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/40">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
             {services.map((s, i) => (
-              <ScrollReveal key={s.number} delay={i * 0.08} direction="up">
-                <div className="service-card p-8 md:p-10 bg-dark group">
-                  <span className="section-label">{s.number}</span>
-                  <h3
-                    className="font-display text-2xl md:text-3xl font-light text-cream mt-4 mb-4 group-hover:text-gold transition-colors duration-300"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    {s.title}
-                  </h3>
+              <ScrollReveal key={s.num} delay={i * 0.08} direction="up">
+                <div className="service-card p-8 md:p-10 bg-ivory group">
+                  <span className="section-label">{s.num}</span>
+                  <h3 className="font-display text-2xl md:text-3xl font-light text-plum mt-4 mb-4 group-hover:text-wine transition-colors duration-300"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>{s.title}</h3>
                   <p className="text-sm text-text-secondary leading-relaxed">{s.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
           </div>
-
           <ScrollReveal delay={0.3}>
             <div className="text-center mt-8">
-              <Link href="/services" className="btn-ghost">
-                <span>View All Services + Pricing</span>
-              </Link>
+              <Link href="/services" className="btn-outline"><span>View Full Services + Pricing</span></Link>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ─── SCRIPTURE ─── */}
-      <section className="py-20 md:py-28 px-6 md:px-10 lg:px-16 bg-dark border-y border-border/40">
+      {/* GALLERY PREVIEW */}
+      <section className="py-20 md:py-32 px-6 md:px-10 lg:px-16 bg-blush">
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0 items-center">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-12">
             <ScrollReveal direction="left">
-              <div className="text-center py-10 lg:py-8 px-8">
-                <p
-                  className="font-display italic text-xl md:text-2xl font-light text-cream leading-relaxed max-w-md mx-auto mb-5"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  &ldquo;I will establish{" "}
-                  <span className="text-gold not-italic">my covenant</span>{" "}
-                  between me and you and your descendants after you, throughout your generations, for an everlasting covenant.&rdquo;
-                </p>
-                <p className="text-[10px] tracking-[0.2em] uppercase text-gold">Genesis 17:7</p>
-              </div>
+              <p className="section-label mb-3 flex items-center gap-3">
+                <span className="block w-6 h-px bg-rose/60" />Featured Work
+              </p>
+              <h2 className="font-display text-display-lg font-light text-plum"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                Created with Love,<br /><em className="italic text-rose">Blessed by Faith</em>
+              </h2>
             </ScrollReveal>
-
-            <div className="hidden lg:block bg-border/40 self-stretch" />
-
             <ScrollReveal direction="right">
-              <div className="text-center py-10 lg:py-8 px-8 border-t border-border/40 lg:border-t-0">
-                <p
-                  className="font-display italic text-xl md:text-2xl font-light text-cream leading-relaxed max-w-md mx-auto mb-5"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  &ldquo;For we are{" "}
-                  <span className="text-gold not-italic">God&apos;s handiwork</span>
-                  , created in Christ Jesus to do good works, which God prepared in advance for us to do.&rdquo;
-                </p>
-                <p className="text-[10px] tracking-[0.2em] uppercase text-gold">Ephesians 2:10</p>
-              </div>
+              <Link href="/gallery" className="btn-primary"><span>Full Gallery</span></Link>
             </ScrollReveal>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            {[{ span: "row-span-2", aspect: "aspect-[2/3]" }, { span: "", aspect: "aspect-square" },
+              { span: "", aspect: "aspect-square" }, { span: "", aspect: "aspect-square" },
+              { span: "", aspect: "aspect-square" }, { span: "", aspect: "aspect-square" },
+              { span: "", aspect: "aspect-square" }].map((item, n) => (
+              <div key={n} className={`gallery-item ${item.span}`}>
+                <ScrollReveal delay={n * 0.07} direction="up">
+                  <div className={`photo-placeholder ${item.aspect}`}>
+                    <div className="z-10 text-[9px] tracking-[0.18em] uppercase text-rose/50">Add Photo</div>
+                  </div>
+                </ScrollReveal>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ─── CTA ─── */}
-      <section className="py-0">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-[440px]">
-          <div className="py-20 md:py-28 px-6 md:px-10 lg:px-16 flex flex-col justify-center bg-dark">
+      {/* TESTIMONIALS */}
+      <section className="py-20 md:py-36 px-6 md:px-10 lg:px-16 bg-ivory">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="text-center max-w-lg mx-auto mb-16">
             <ScrollReveal>
-              <p className="section-label mb-6 flex items-center gap-3">
-                <span className="block w-6 h-px bg-gold" />
-                Ready to Build?
+              <p className="section-label justify-center mb-4 flex items-center gap-3">
+                <span className="block w-6 h-px bg-rose/60" />Client Love
               </p>
-              <h2
-                className="font-display text-display-lg font-light text-cream leading-tight mb-4"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Let&apos;s Build Something<br />
-                That <em className="italic text-gold">Lasts</em>
+              <h2 className="font-display text-display-lg font-light text-plum"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                What They Say<br /><em className="italic text-rose">After the Promise</em>
               </h2>
-              <p className="text-text-secondary text-sm md:text-base leading-loose mb-8 max-w-md">
-                Book a free Interest Meeting and let&apos;s talk about your brand, your vision, and how Moore Covenant Productions can help you build an online presence worthy of your calling.
+            </ScrollReveal>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <ScrollReveal key={i} delay={i * 0.1} direction="up">
+                <div className="bg-cream p-8 md:p-10 border border-border relative hover:border-rose/40 transition-colors duration-300">
+                  <span className="block text-5xl text-rose/20 leading-none mb-4"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>&ldquo;</span>
+                  <p className="font-display text-lg italic text-plum leading-relaxed mb-6"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}>{t.quote}</p>
+                  <div className="border-t border-border pt-4">
+                    <p className="text-[10px] tracking-[0.18em] uppercase text-text-primary font-medium">{t.name}</p>
+                    <p className="text-[9px] tracking-[0.12em] uppercase text-rose mt-1">{t.event}</p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px]">
+          <div className="py-20 md:py-28 px-6 md:px-10 lg:px-16 bg-wine flex flex-col justify-center">
+            <ScrollReveal>
+              <p className="section-label mb-6 flex items-center gap-3" style={{ color: "#C9A878" }}>
+                <span className="block w-6 h-px" style={{ background: "#C9A878" }} />Begin Your Promise
+              </p>
+              <h2 className="font-display text-display-lg font-light text-cream leading-tight mb-4"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                Your Dream Event<br /><em className="italic" style={{ color: "#C9A878" }}>Is Already Written</em>
+              </h2>
+              <p className="text-cream/70 text-sm md:text-base leading-loose mb-8 max-w-md">
+                Book your free consultation and let&apos;s talk about your vision. God already has the details — we&apos;re just here to help you see them come alive.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="btn-primary">
-                  <span>Book a Free Call</span>
-                </Link>
-                <Link href="/services" className="btn-ghost">
-                  <span>View Packages</span>
-                </Link>
+                <Link href="/contact" className="btn-ghost-light"><span>Book a Free Consultation</span></Link>
+                <Link href="/services" className="btn-ghost-light"><span>View Pricing</span></Link>
               </div>
             </ScrollReveal>
           </div>
-
-          {/* Visual side */}
-          <div className="relative min-h-[300px] bg-black border-l border-border/40 flex items-center justify-center overflow-hidden">
-            <div
-              className="absolute inset-0"
-              style={{
-                background: "radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%)",
-              }}
-            />
-            <div className="flex flex-col items-center gap-4 opacity-20">
-              <svg viewBox="0 0 48 48" className="w-16 h-16" style={{ stroke: "#C9A84C", fill: "none", strokeWidth: 1 }}>
-                <rect x="8" y="4" width="32" height="40" rx="2" />
-                <circle cx="24" cy="18" r="7" />
-                <path d="M8 44c0-8.837 7.163-16 16-16s16 7.163 16 16" />
-              </svg>
-              <span className="text-[9px] tracking-[0.14em] uppercase text-gold">Add lifestyle photo here</span>
+          <div className="relative min-h-[320px] overflow-hidden">
+            <div className="photo-placeholder w-full h-full min-h-[320px] border-0" style={{ background: "linear-gradient(135deg, #F0DCE0 0%, #E8C4C8 50%, #D4A0AF 100%)" }}>
+              <div className="relative z-10 flex flex-col items-center gap-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" opacity="0.4">
+                  <circle cx="12" cy="8" r="4" stroke="#6B1F3A" strokeWidth="1.5"/>
+                  <path d="M3 21c0-4.971 4.029-9 9-9s9 4.029 9 9" stroke="#6B1F3A" strokeWidth="1.5"/>
+                </svg>
+                <span className="text-wine/40 text-[10px] tracking-[0.2em] uppercase">Add event photo here</span>
+              </div>
             </div>
           </div>
         </div>

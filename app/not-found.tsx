@@ -15,11 +15,20 @@ export default function NotFound() {
         >
           404
         </motion.p>
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="block text-wine mb-2"
+          style={{ fontFamily: "'Great Vibes', cursive", fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+        >
+          Oh no...
+        </motion.span>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-5xl md:text-7xl font-light text-cream mb-5"
+          transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-4xl md:text-6xl font-light text-plum mb-5"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
         >
           This page doesn&apos;t exist yet.
@@ -27,15 +36,15 @@ export default function NotFound() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="text-text-secondary text-sm max-w-sm mx-auto mb-10"
         >
-          Every great story has gaps. This one just hasn&apos;t been written yet.
+          But every promise has a purpose. Head back home and let&apos;s find what you&apos;re looking for.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.7 }}
         >
           <Link href="/" className="btn-primary">
             <span>Back to Home</span>
