@@ -189,7 +189,6 @@ export function BalloonGarland({ className = "" }: { className?: string }) {
         viewBox="0 0 460 90"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
-        preserveAspectRatio="xMidYMid meet"
         preserveAspectRatio="none"
       >
         {/* Garland string */}
