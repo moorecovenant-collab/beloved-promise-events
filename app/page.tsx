@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { BalloonArch, BalloonCluster, BalloonGarland } from "@/components/ui/BalloonDecor";
 
 const pillars = [
   {
@@ -59,6 +60,8 @@ export default function HomePage() {
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-ivory">
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blush/60 to-transparent" />
+          {/* Gold balloon arch — behind photo */}
+          <BalloonArch className="absolute top-0 right-0 w-[580px] md:w-[700px] opacity-70" />
           <div className="absolute top-1/4 right-8 md:right-16 lg:right-24 w-[320px] md:w-[400px] lg:w-[480px] aspect-[3/4]">
             <div className="photo-placeholder w-full h-full relative">
               <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-rose/40" />
@@ -147,6 +150,8 @@ export default function HomePage() {
 
       {/* SCRIPTURE BANNER */}
       <section className="bg-wine py-14 md:py-20 overflow-hidden relative">
+        {/* Balloon garland top */}
+        <BalloonGarland className="absolute top-0 left-0 w-full h-20 opacity-40" />
         <div className="absolute inset-0 pointer-events-none opacity-10">
           <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-gold/20 -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-rose/20 translate-x-1/3 translate-y-1/3" />
@@ -197,8 +202,10 @@ export default function HomePage() {
       </section>
 
       {/* ABOUT AMYAH TEASER */}
-      <section className="py-20 md:py-36 px-6 md:px-10 lg:px-16 bg-cream">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
+      <section className="py-20 md:py-36 px-6 md:px-10 lg:px-16 bg-cream relative overflow-hidden">
+        <BalloonCluster className="absolute bottom-0 right-0 w-40 h-40 opacity-50" variant="right" />
+        <BalloonCluster className="absolute top-8 left-0 w-28 h-28 opacity-30" variant="left" />
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center relative z-10">
           <ScrollReveal direction="left">
             <div className="relative aspect-[3/4] max-w-md overflow-visible">
               <div className="photo-placeholder w-full h-full">
@@ -283,8 +290,9 @@ export default function HomePage() {
       </section>
 
       {/* GALLERY PREVIEW */}
-      <section className="py-20 md:py-32 px-6 md:px-10 lg:px-16 bg-blush">
-        <div className="max-w-[1400px] mx-auto">
+      <section className="py-20 md:py-32 px-6 md:px-10 lg:px-16 bg-blush relative overflow-hidden">
+        <BalloonCluster className="absolute top-0 right-0 w-44 h-44 opacity-45" variant="right" />
+        <div className="max-w-[1400px] mx-auto relative z-10">
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-12">
             <ScrollReveal direction="left">
               <p className="section-label mb-3 flex items-center gap-3">
@@ -352,7 +360,9 @@ export default function HomePage() {
       {/* FINAL CTA */}
       <section className="relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px]">
-          <div className="py-20 md:py-28 px-6 md:px-10 lg:px-16 bg-wine flex flex-col justify-center">
+          <div className="py-20 md:py-28 px-6 md:px-10 lg:px-16 bg-wine flex flex-col justify-center relative overflow-hidden">
+            <BalloonGarland className="absolute top-0 left-0 w-full h-16 opacity-30" />
+            <BalloonCluster className="absolute -bottom-4 -left-4 w-32 h-32 opacity-25" variant="left" />
             <ScrollReveal>
               <p className="section-label mb-6 flex items-center gap-3" style={{ color: "#C9A878" }}>
                 <span className="block w-6 h-px" style={{ background: "#C9A878" }} />Begin Your Promise
