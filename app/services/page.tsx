@@ -91,7 +91,7 @@ const services = [
       </svg>
     ),
     name: "Website Building",
-    price: "From $997",
+    price: "From $500",
     period: " flat",
     desc: "Clean, conversion-focused websites built to represent your brand at the highest level. Includes design, development, and launch.",
   },
