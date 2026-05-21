@@ -191,21 +191,21 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
               <p className="section-label mb-4 flex items-center gap-3">
-                <span className="block w-6 h-px bg-rose/60" />Who We Serve
+                <span className="block w-6 h-px bg-rose/60" />Who I Work With
               </p>
               <h2 className="font-display text-display-lg font-light text-plum leading-tight mb-6"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                Whoever God Brings<br /><em className="italic text-rose">Through the Door</em>
+                I Work Where<br /><em className="italic text-rose">God Sends Me</em>
               </h2>
               <div className="space-y-4 text-text-secondary text-sm md:text-base leading-loose">
                 <p>
-                  I am open to all — but my heart is for kingdom-minded clients. Believers, Christian leaders, musicians, and families who want a decorator who prays over their event before setting up a single piece.
+                  My heart is for the people God sends my way. The believers. The kingdom builders. The families who want their celebration to carry weight beyond the decorations — who want someone who will pray over the space before the first guest walks in.
                 </p>
                 <p>
-                  I also welcome non-believing clients warmly. I don&apos;t preach — I serve. And prayerfully, through the excellence of my work and the warmth of the experience, they see something different.
+                  That said, God sends all kinds of people my way — and every one of them is welcomed. I don&apos;t lead with a sermon. I lead with excellence, warmth, and intention. My faith isn&apos;t something I announce — it&apos;s something you feel in the experience. And if you leave curious about why it felt different, that&apos;s more than enough for me.
                 </p>
                 <p className="text-wine font-medium">
-                  What I will not do: environments or events centered around sin — explicit content, adult entertainment venues, or anything that directly conflicts with my faith values.
+                  What I do know is this: I pour my whole self into every event I take on. So the spaces I work in matter to me. I&apos;m naturally drawn to environments where beauty, joy, and intention can exist together freely — celebrations that honor something real.
                 </p>
               </div>
             </ScrollReveal>
